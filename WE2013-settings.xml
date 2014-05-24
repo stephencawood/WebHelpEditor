@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<webessentials version="1.9">
+  <settings>
+    <AllMessagesToOutputWindow>false</AllMessagesToOutputWindow>
+    <BrowserLink_ShowMenu>True</BrowserLink_ShowMenu>
+    <CoffeeScriptCompileToLocation />
+    <CoffeeScriptGenerateJsFile>True</CoffeeScriptGenerateJsFile>
+    <CoffeeScriptMinify>True</CoffeeScriptMinify>
+    <CoffeeScriptShowPreviewWindow>True</CoffeeScriptShowPreviewWindow>
+    <CoffeeScriptWrapClosure>True</CoffeeScriptWrapClosure>
+    <CssEnableMinification>True</CssEnableMinification>
+    <CssErrorLocation>1</CssErrorLocation>
+    <CssShowBrowserTooltip>True</CssShowBrowserTooltip>
+    <CssShowUnsupported>True</CssShowUnsupported>
+    <CssSyncVendorValues>True</CssSyncVendorValues>
+    <EnableAngularValidation>True</EnableAngularValidation>
+    <EnableBrowserLinkMenu>True</EnableBrowserLinkMenu>
+    <EnableEnterFormat>True</EnableEnterFormat>
+    <HtmlEnableMinification>True</HtmlEnableMinification>
+    <JavaScriptCamelCaseClassNames>False</JavaScriptCamelCaseClassNames>
+    <JavaScriptCamelCasePropertyNames>False</JavaScriptCamelCasePropertyNames>
+    <JavaScriptCommentCompletion>True</JavaScriptCommentCompletion>
+    <JavaScriptEnableMinification>True</JavaScriptEnableMinification>
+    <JavaScriptGenerateSourceMaps>True</JavaScriptGenerateSourceMaps>
+    <JsHintEnable>True</JsHintEnable>
+    <JsHintErrorLocation>2</JsHintErrorLocation>
+    <KeepImportantComments>false</KeepImportantComments>
+    <LessGenerateCssFile>True</LessGenerateCssFile>
+    <LessMinify>True</LessMinify>
+    <LessShowPreviewWindow>True</LessShowPreviewWindow>
+    <MarkdownAutoHyperlinks>True</MarkdownAutoHyperlinks>
+    <MarkdownAutoNewLine>True</MarkdownAutoNewLine>
+    <MarkdownCompileToLocation>True</MarkdownCompileToLocation>
+    <MarkdownEnableCompiler>True</MarkdownEnableCompiler>
+    <MarkdownEncodeProblemUrlCharacters>True</MarkdownEncodeProblemUrlCharacters>
+    <MarkdownGenerateXHTML>True</MarkdownGenerateXHTML>
+    <MarkdownLinkEmails>True</MarkdownLinkEmails>
+    <MarkdownShowPreviewWindow>True</MarkdownShowPreviewWindow>
+    <MarkdownStrictBoldItalic>True</MarkdownStrictBoldItalic>
+    <PixelPushing_OnByDefault>True</PixelPushing_OnByDefault>
+    <SassGenerateCssFile>True</SassGenerateCssFile>
+    <SassMinify>True</SassMinify>
+    <SassShowPreviewWindow>True</SassShowPreviewWindow>
+    <SvgShowPreviewWindow>true</SvgShowPreviewWindow>
+    <TsLintEnable>True</TsLintEnable>
+    <TsLintErrorLocation>2</TsLintErrorLocation>
+    <TypeScriptBraceCompletion>True</TypeScriptBraceCompletion>
+    <TypeScriptShowPreviewWindow>True</TypeScriptShowPreviewWindow>
+    <UnusedCss_IgnorePatterns>bootstrap*; reset.css; normalize.css; jquery*; toastr*; foundation*; animate*; inuit*; elements*; ratchet*; hint*; flat-ui*; 960*; skeleton*</UnusedCss_IgnorePatterns>
+  </settings>
+</webessentials>

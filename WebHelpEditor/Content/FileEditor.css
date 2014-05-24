@@ -1,0 +1,35 @@
+﻿/* Cawood: button that looks like an achor */
+button.link {
+    background:none!important;
+     border:none; 
+     padding:0!important;
+    
+    /*optional*/
+    font-family:arial,sans-serif; /*input has OS specific font-family*/
+     color:#069;
+     cursor:pointer;
+}
+button.link:hover{
+         text-decoration:underline;
+}
+
+input.title {
+    width: 540px;
+    max-width: 540px;
+}
+
+/* jsTree Styles */
+/*#MainTree .jstree-closed > a > ins { background-image:url("/jstree/themes/default/d.gif"); } 
+#MainTree .jstree-open > a > ins { background-image:url("/jstree/themes/default/d.gif"); } 
+#MainTree .jstree-leaf > a > ins { background-image:url("/jstree/themes/default/Document-icon.png"); }*/
+
+/*li.jsTree-leaf > a > ins .jstree-icon { background:url("/jstree/themes/default/Document-icon.png") !important;}*/ 
+
+ /* replace folder icons with another image, remove leaf image         
+    li.jstree-open > a .jstree-icon {background:url("imageOpen.gif") 0px 0px no-repeat !important;}
+    li.jstree-closed > a .jstree-icon {background:url("imageClosed.gif") 0px 0px no-repeat !important;}
+    li.jstree-leaf > a .jstree-icon { display: none; }*/
+
+/*.jstree-classic .jstree-leaf  > a > ins { font-size: 11pt; 
+background:transparent; background-image:url("/jstree/themes/default/Document-icon.png") !important; 
+background-repeat: no-repeat !important; }*/ 

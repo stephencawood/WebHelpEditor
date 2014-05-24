@@ -1,0 +1,105 @@
+<html>
+	<head>
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="/AQUARIUS/help-en/include/templates/wwhelp.css"/>
+	</head>
+	<body>
+<table border="0" width="100%" class="banner">
+    <tbody><tr>
+      <td>
+        <table>
+          <tbody><tr>
+            <td rowspan="2">
+            <img src="/AQUARIUS/help-en/include/images/AQUARIUS-HELP-MANUAL-logo.png">
+            </td>
+
+            <td>&nbsp;&nbsp;<span style="font:10pt calibri;color:white">AQUARIUS Help Manual</span></td>
+          </tr>
+
+          <tr>
+            <td>&nbsp;&nbsp;<span style="font:12pt calibri;color:white;"><b>General
+            Tab</b></span></td>
+          </tr>
+        </tbody></table>
+      </td>
+    </tr>
+
+    <tr>
+      <td></td>
+    </tr>
+  </tbody></table>
+
+  <div style="margin-left:10pt;margin-right:10pt">
+    <p></p>
+
+    <div class="body">
+      <h4>The General tab allows the user to view the details
+      associated with the selected location including:</h4>
+
+      <p><span style="FONT-FAMILY: Calibri; FONT-SIZE: 10pt"><span style="FONT: 9pt Calibri; COLOR: #0080c0">&nbsp;<img src="/AQUARIUS/help-en/include/images/One-Bullet.jpg">&nbsp;</span></span> Location
+      name<br>
+      <span style="FONT-FAMILY: Calibri; FONT-SIZE: 10pt"><span style="FONT: 9pt Calibri; COLOR: #0080c0">&nbsp;<img src="/AQUARIUS/help-en/include/images/One-Bullet.jpg">&nbsp;</span></span> A unique
+      identifier<br>
+      <span style="FONT-FAMILY: Calibri; FONT-SIZE: 10pt"><span style="FONT: 9pt Calibri; COLOR: #0080c0">&nbsp;<img src="/AQUARIUS/help-en/include/images/One-Bullet.jpg">&nbsp;</span></span> Latitude and
+      Longitude degrees<br>
+      <span style="FONT-FAMILY: Calibri; FONT-SIZE: 10pt"><span style="FONT: 9pt Calibri; COLOR: #0080c0">&nbsp;<img src="/AQUARIUS/help-en/include/images/One-Bullet.jpg">&nbsp;</span></span> As well as a
+      whole host of other additional location specific
+      attributes<br>
+      <img src="/AQUARIUS/help-en/include/images/19-04-2011%203-53-35%20PM.png"><br>
+      <span style="FONT: bold 10pt Calibri; COLOR: #223890"><span style="FONT: bold 10pt Calibri; COLOR: #223890">The icons in the
+      general tab provide the following functions:<br>
+      <br></span></span></p>
+
+      <p>
+      </p><span style="FONT-FAMILY: Tahoma; FONT-SIZE: 9pt"><span style="LINE-HEIGHT: 115%; FONT-FAMILY: 'Calibri','sans-serif'; FONT-SIZE: 10pt;"><span style="FONT: bold 10pt Calibri; COLOR: #223890"><span style="FONT-FAMILY: 'Calibri','sans-serif'; COLOR: black; FONT-SIZE: 10pt"><font size="3" face="Times New Roman"><font size="3" face="Times New Roman"><img align="left" src="/AQUARIUS/help-en/include/images/4-28-2011%203-27-47%20PM.png"></font></font></span>New
+      Folder</span>&nbsp;-&nbsp;Allows the user to create a new folder under
+      the parent location. The name can be amended by clicking onto
+      the newly created folder.<br>
+      <br>
+        </span></span>
+        <p><span style="FONT-FAMILY: 'Calibri','sans-serif'; COLOR: black; FONT-SIZE: 10pt">
+            <font size="3" face="Times New Roman"><img align="left" src="/AQUARIUS/help-en/include/images/4-28-2011%203-33-25%20PM.png"><span style="FONT-FAMILY: Tahoma; FONT-SIZE: 9pt"><span style="LINE-HEIGHT: 115%; FONT-FAMILY: 'Calibri','sans-serif'; FONT-SIZE: 10pt;"><span style="FONT: bold 10pt Calibri; COLOR: #223890">New
+      File</span>&nbsp;-&nbsp;Allows the user to add a new file to that
+      selected folder. Any file can be added to the folder or
+      parent such as photos, reports, .pdf or data files associated
+      with that location.<br>
+      <br>
+            </span></span></font></span></p>
+
+      <p><span style="FONT-FAMILY: 'Calibri','sans-serif'; COLOR: black; FONT-SIZE: 10pt">
+      <font size="3" face="Times New Roman"><span style="FONT-FAMILY: 'Calibri','sans-serif'; COLOR: black; FONT-SIZE: 10pt">
+      <font size="3" face="Times New Roman"><font size="3" face="Times New Roman"><img align="left" src="/AQUARIUS/help-en/include/images/4-28-2011%203-43-44%20PM.png"><span style="FONT-FAMILY: Tahoma; FONT-SIZE: 9pt"><span style="LINE-HEIGHT: 115%; FONT-FAMILY: 'Calibri','sans-serif'; FONT-SIZE: 10pt;"><span style="FONT: bold 10pt Calibri; COLOR: #223890">Delete
+      File/Folder</span>&nbsp;-&nbsp;Allows the user to delete any file or
+      folder that is available. Select the File/Folder of choice
+      and click on the Delete File/Folder icon. It will be
+      immediately deleted.<br>
+      <br></span></span></font></font></span></font></span></p>
+
+      <p><span style="FONT-FAMILY: 'Calibri','sans-serif'; COLOR: black; FONT-SIZE: 10pt">
+      <font size="3" face="Times New Roman"><font size="3" face="Times New Roman"><font size="3" face="Times New Roman"><font size="3" face="Times New Roman"><span style="FONT-FAMILY: 'Calibri','sans-serif'; COLOR: black; FONT-SIZE: 10pt">
+      <font size="3" face="Times New Roman"><font size="3" face="Times New Roman"><img align="left" src="/AQUARIUS/help-en/include/images/4-28-2011%203-45-25%20PM.png"><span style="FONT-FAMILY: Tahoma; FONT-SIZE: 9pt"><span style="LINE-HEIGHT: 115%; FONT-FAMILY: 'Calibri','sans-serif'; FONT-SIZE: 10pt;"><span style="FONT: bold 10pt Calibri; COLOR: #223890">Set
+      Location Photo</span>&nbsp;-&nbsp;Allows the user to set a photo for
+      the location. Select and add the new photo and click the Set
+      Location Photo icon to set the photo for the location. The
+      image will upload and appear in the blank section below the
+      General
+      Tab</span></span></font></font></span></font></font></font></font></span></p>
+
+      <p><span style="FONT-FAMILY: 'Calibri','sans-serif'; COLOR: black; FONT-SIZE: 10pt">&nbsp;<font size="3" face="Times New Roman"><span style="FONT-FAMILY: Tahoma; FONT-SIZE: 9pt"><span style="LINE-HEIGHT: 115%; FONT-FAMILY: 'Calibri','sans-serif'; FONT-SIZE: 10pt;"><span style="FONT: bold 10pt Calibri; COLOR: #223890"><img align="left" src="/AQUARIUS/help-en/include/images/Download.png"> Download File</span> - Allows the
+      user to download the selected file to their
+      computer</span></span></font></span></p>
+    </div>
+
+    <table border="0" cellpadding="3" width="99%" class=".body">
+    </table>
+  </div>
+
+  <table width="100%" class="banner" style="color:white;">
+    <tbody><tr>
+      <td><small>Last Updated: <i>07/05/13</i></small></td>
+    </tr>
+  </tbody></table>
+
+  <p>&nbsp;<br></p>
+	</body>
+</html>
