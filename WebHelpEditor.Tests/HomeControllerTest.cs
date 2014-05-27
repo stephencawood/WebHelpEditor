@@ -25,9 +25,9 @@ namespace WebHelpEditor.Tests
     [TestClass]
     public class HomeControllerTest
     {
-        // Format for file path string passed to Home "S%3a%5cSource%5cFileEditor%5cFileEditor%5cTest%5chelp-fr%5ctestDoNotEdit.htm"
+        // Format for file path string passed to Home "S%3a%5cSource%5cWebHelpEditor%5cWebHelpEditor%5cTest%5chelp-fr%5ctestDoNotEdit.htm"
         // maps to: "S:\Source\WebHelpEditor\WebHelpEditor\Test\help-fr\testDoNotEdit.htm";
-        string htmFileEncodedPath = "S%3a%5cSource%5cFileEditor%5cFileEditor%5cTest%5chelp-fr%5ctestDoNotEdit.htm";
+        string htmFileEncodedPath = "S%3a%5cSource%5cWebHelpEditor%5cWebHelpEditor%5cTest%5chelp-fr%5ctestDoNotEdit.htm";
         string fileContent = @"<html><head><title>Test content for file editor</title><link rel=""stylesheet"" type=""text/css"" href=""/AQUARIUS/help-en/include/templates/wwhelp.css"" /></head><body><p>This is an HTML test</p></body></html>";
             
         [TestMethod]
@@ -47,7 +47,7 @@ namespace WebHelpEditor.Tests
         [TestMethod]
         public void SaveFileContentTest()
         {
-            // Format for file path string passed to Home "S%3a%5cSource%5cFileEditor%5cFileEditor%5cTest%5cSaveFileTest"
+            // Format for file path string passed to Home "S%3a%5cSource%5cWebHelpEditor%5cWebHelpEditor%5cTest%5cSaveFileTest"
             // maps to: "S:\Source\WebHelpEditor\WebHelpEditor\Test\SaveFileTest";
 
             var home = new HomeController();

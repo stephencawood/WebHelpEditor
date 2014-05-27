@@ -23,7 +23,7 @@ namespace WebHelpEditor.Controllers
         public ActionResult Status()
         {
             // TODO this should be behind security on the production box
-            //if (FileEditorUser.Current == null)
+            //if (WebHelpEditorUser.Current == null)
             //    return RedirectToAction("Index", "Account");
             
             return View();
@@ -31,7 +31,7 @@ namespace WebHelpEditor.Controllers
 
         public ActionResult Users()
         {
-            //if (FileEditorUser.Current == null || !FileEditorUser.Current.IsAdmin)
+            //if (WebHelpEditorUser.Current == null || !WebHelpEditorUser.Current.IsAdmin)
             //    return RedirectToAction("Index", "Account");
 
             //ViewBag.Role = "Admin";
@@ -50,7 +50,7 @@ namespace WebHelpEditor.Controllers
 
         public ActionResult EditUser(string id)
         {
-            //if (FileEditorUser.Current == null || !FileEditorUser.Current.IsAdmin)
+            //if (WebHelpEditorUser.Current == null || !WebHelpEditorUser.Current.IsAdmin)
             //    return RedirectToAction("Index", "Account");
             //ViewModels.EditUserModel model = new ViewModels.EditUserModel();
 
@@ -59,9 +59,9 @@ namespace WebHelpEditor.Controllers
             //model.Comment = aspUser.Comment;
             //model.AccountLocked = aspUser.IsLockedOut;
 
-            //List<UserInfo> FileEditorUserInfo = DB.GetUserInfoByProfileID(Convert.ToInt32(aspUser.Comment));
-            //model.UserNameFileEditor = FileEditorUserInfo[0].Username;
-            //model.LastName = FileEditorUserInfo[0].LastName;
+            //List<UserInfo> WebHelpEditorUserInfo = DB.GetUserInfoByProfileID(Convert.ToInt32(aspUser.Comment));
+            //model.UserNameWebHelpEditor = WebHelpEditorUserInfo[0].Username;
+            //model.LastName = WebHelpEditorUserInfo[0].LastName;
 
             //return View(model);
             return View();

@@ -6,6 +6,9 @@ using System.Data.Entity;
 using System.Globalization;
 using System.Web.Security;
 
+//using System.Web.Mvc;
+using System.Linq;
+
 namespace WebHelpEditor.Models
 {
     public class UsersContext : DbContext
@@ -68,6 +71,7 @@ namespace WebHelpEditor.Models
 
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
+
     }
 
     public class RegisterModel

@@ -1,6 +1,6 @@
-﻿@model FileEditor.Models.LoginModel
-@using FileEditor.Helper;
-@using FileEditor.Models;
+﻿@model WebHelpEditor.Models.LoginModel
+@using WebHelpEditor.Helper;
+@using WebHelpEditor.Models;
 @{
     Layout = null;
     Response.Headers["X-UA-Compatible"] = "IE=10";
@@ -88,7 +88,7 @@
             <div class="row" id="editorApp" ng-app="editorApp" ng-controller="EditorCtrl">
                 <div class="col-lg-3">
                     <h1>File System</h1>
-                    @*<p>@Html.GetFilesInfo(@"S:\Source\FileEditor\FileEditor\Test\")</p>
+                    @*<p>@Html.GetFilesInfo(@"S:\Source\WebHelpEditor\WebHelpEditor\Test\")</p>
                         <br /><br />*@
 
                     @*<div>
@@ -112,7 +112,7 @@
                     <!-- jsTree Test -->
                     @*<div>
                             <p>jsTree test</p>
-                            @foreach (var path in Directory.GetFiles(@"S:\Source\FileEditor\FileEditor\Test"))
+                            @foreach (var path in Directory.GetFiles(@"S:\Source\WebHelpEditor\WebHelpEditor\Test"))
                                 {
                                     //TODO Created a textarea tag using TagBuilder class.
                                     //TagBuilder textarea = new TagBuilder("textarea");
@@ -134,7 +134,7 @@
                     <h1>Multilingual Content</h1>
                     <p class="lead">File: <span class="lead" id="multilingualfile">{{multilingualfile}}</span></p>
 
-                    @*<textarea name="textFormula1" id="textFormula1" rows="10" cols="40">@Html.GetFileBodyContent(File.ReadAllText(@"S:\Source\FileEditor\FileEditor\AQUARIUS\help-en\help\1GettingStarted\index.htm"))</textarea><br />*@
+                    @*<textarea name="textFormula1" id="textFormula1" rows="10" cols="40">@Html.GetFileBodyContent(File.ReadAllText(@"S:\Source\WebHelpEditor\WebHelpEditor\AQUARIUS\help-en\help\1GettingStarted\index.htm"))</textarea><br />*@
                     @*Title: <textarea name="title" id="title2" rows="1" cols="400">No file loaded...</textarea><br />*@
                     <div style="vertical-align:top">Title: <input type="text" id="titleHtml" class="title" placeholder="No file loaded..." width="400" /></div>
                     <textarea name="textEditor" id="textEditor" rows="10" cols="40">No file loaded...</textarea><br />
@@ -182,7 +182,7 @@
 
                 @*
                     <form name="myform" action="" method="GET">
-                        <textarea name="textEditor" id="textEditor" rows="10" cols="40">@Html.GetFileBodyContent(File.ReadAllText(@"S:\Source\FileEditor\FileEditor\Test\test.txt"))</textarea><br />
+                        <textarea name="textEditor" id="textEditor" rows="10" cols="40">@Html.GetFileBodyContent(File.ReadAllText(@"S:\Source\WebHelpEditor\WebHelpEditor\Test\test.txt"))</textarea><br />
                         <script language="javascript1.2">
                             make_wyzz('textEditor');
                         </script>

@@ -1,11 +1,10 @@
-﻿@model FileEditor.Models.LoginModel
-@using FileEditor.Helper;
-@using FileEditor.Models;
+﻿@model Site
+@using WebHelpEditor.Helper;
+@using WebHelpEditor.Models;
 @{
     Layout = null;
     Response.Headers["X-UA-Compatible"] = "IE=10";
     ViewBag.Title = "Web Help Editor";
-    //ViewBag.FilePathFrench = HttpRuntime.AppDomainAppPath + @"\Test\help-fr\";
 }
 @functions{
     public string GetAntiForgeryToken()
@@ -43,7 +42,6 @@
     <!-- Navbar -->
     @*<div data-bind="visible: loading">Loading...</div>*@
     @*<div ng-show="contentLoaded" data-bind="visible: loading">Loading...</div>*@
-
         @*<div ng-show="container body-content">
             Loading...
         </div>*@
@@ -65,6 +63,13 @@
                         @*<li><a href="#" data-bind="click: navigateToHome">Home</a></li>
                             <li>@Html.ActionLink("API", "Index", "Help", new { area = "HelpPage" }, null)</li>*@
                     </ul>
+                    @*@Html.DropDownList(m => m.SiteId, Model.Sites)*@
+                    <div>
+                        @using (Html.BeginForm()) {
+                            @Html.DropDownListFor(model => model.Name, (SelectList)ViewBag.Sites, "Language")
+                        }
+                    </div>
+
                     <div id="userSettings" class="nav navbar-nav navbar-right">
                         @Html.Partial("_UserSettings")
                     </div>

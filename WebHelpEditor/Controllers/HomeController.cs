@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 
 using System.IO;
+//using System.Xml.Linq;
 using WebHelpEditor.Helper;
 using WebHelpEditor.Models;
 
@@ -18,15 +19,16 @@ namespace WebHelpEditor.Controllers
         {
             ViewBag.ReturnUrl = returnUrl;
             Session["AlreadyPopulated"] = false;
+            ViewBag.Sites = IndexViewModel.GetSites();
             return View();
         }
 
-        public ActionResult Test(string returnUrl)
-        {
-            ViewBag.ReturnUrl = returnUrl;
-            Session["AlreadyPopulated"] = false;
-            return View();
-        }
+        //public ActionResult Test(string returnUrl)
+        //{
+        //    ViewBag.ReturnUrl = returnUrl;
+        //    Session["AlreadyPopulated"] = false;
+        //    return View();
+        //}
 
         [NoCache]
         [HttpGet]
