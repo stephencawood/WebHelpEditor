@@ -151,6 +151,24 @@
     <Content Include="Scripts\jquery-2.0.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.0.3.js" />
     <Content Include="Scripts\jquery-2.0.3.min.js" />
+    <Content Include="TestFiles\help-en\1GeneralTabWSCLocMan.htm" />
+    <Content Include="TestFiles\help-en\3UserAccessTabWSCLocMan.htm" />
+    <Content Include="TestFiles\help-en\6AnalysisRemarksWSCLocMan.htm" />
+    <Content Include="TestFiles\help-en\index - Copy.htm" />
+    <Content Include="TestFiles\help-en\index.htm" />
+    <Content Include="TestFiles\help-en\test.htm" />
+    <Content Include="TestFiles\help-en\test.txt" />
+    <Content Include="TestFiles\help-en\testDoNotEdit.htm" />
+    <Content Include="TestFiles\help-fr\1GeneralTabWSCLocMan.htm" />
+    <Content Include="TestFiles\help-fr\3UserAccessTabWSCLocMan.htm" />
+    <Content Include="TestFiles\help-fr\6AnalysisRemarksWSCLocMan.htm" />
+    <Content Include="TestFiles\help-fr\index - Copy.htm" />
+    <Content Include="TestFiles\help-fr\index.htm" />
+    <Content Include="TestFiles\help-fr\test.htm" />
+    <Content Include="TestFiles\help-fr\test.txt" />
+    <Content Include="TestFiles\help-fr\testDoNotEdit.htm" />
+    <Content Include="TestFiles\testDoNotEdit.htm" />
+    <Content Include="TestFiles\testDoNotEdit_Backup.htm" />
   </ItemGroup>
   <ItemGroup>
     <None Include="fonts\glyphicons-halflings-regular.eot" />
@@ -158,6 +176,20 @@
     <None Include="fonts\glyphicons-halflings-regular.woff" />
     <None Include="packages.config" />
     <None Include="Scripts\jquery-2.0.3.min.map" />
+    <None Include="TestFiles\help-en\3UserAccessTabWSCLocMan.htm_backup_2013-11-26_16-25-33.backup" />
+    <None Include="TestFiles\help-en\index - Copy.htm_backup_2013-11-19_14-10-12.backup" />
+    <None Include="TestFiles\help-en\index - Copy.htm_backup_2013-11-19_14-12-40.backup" />
+    <None Include="TestFiles\help-en\index - Copy.htm_backup_2013-11-26_16-25-43.backup" />
+    <None Include="TestFiles\help-en\test.htm_backup_2013-11-26_16-25-28.backup" />
+    <None Include="TestFiles\help-fr\1GeneralTabWSCLocMan.htm_backup_2013-11-22_15-04-30.backup" />
+    <None Include="TestFiles\help-fr\1GeneralTabWSCLocMan.htm_backup_2013-11-22_15-06-33.backup" />
+    <None Include="TestFiles\help-fr\index - Copy.htm_backup_2013-11-19_14-10-12.backup" />
+    <None Include="TestFiles\help-fr\index - Copy.htm_backup_2013-11-19_14-12-40.backup" />
+    <None Include="TestFiles\help-fr\test.htm_backup_2013-11-19_14-49-26.backup" />
+    <None Include="TestFiles\help-fr\test.htm_backup_2013-11-19_15-02-39.backup" />
+    <None Include="TestFiles\help-fr\test.htm_backup_2013-11-20_11-12-30.backup" />
+    <None Include="TestFiles\help-fr\test.htm_backup_2013-11-20_15-12-23.backup" />
+    <None Include="TestFiles\help-fr\test.htm_backup_2013-11-20_15-16-39.backup" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WebHelpEditor\WebHelpEditor.csproj">
