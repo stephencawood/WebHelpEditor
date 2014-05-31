@@ -41,7 +41,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 
 <h3>real_checkboxes</h3>
 <p class="meta">A boolean. Default is <code>false</code>.</p>
-<p>If set to <code>true</code> real hidden checkboxes will be created for each element, so if the tree is part of a form, checked nodes will be submitted automatically. By default the name of the checkbox is <code>"check_" + <em>the ID of the LI element</em></code> and the value is <code>1</code>, this can be changed using the <code>real_checkboxes_names</code> config option.</p>
+<p>If set to <code>true</code> real hidden checkboxes will be created for each element, so if the tree is part of a form, checked nodes will be submitted automatically. By default the name of the checkbox is <code>"check_" + <em>the id of the LI element</em></code> and the value is <code>1</code>, this can be changed using the <code>real_checkboxes_names</code> config option.</p>
 
 <h3>real_checkboxes_names</h3>
 <p class="meta">A function. Default is <code>function (n) { return [("check_" + (n[0].id || Math.ceil(Math.random() * 10000))), 1]; }</code>.</p>

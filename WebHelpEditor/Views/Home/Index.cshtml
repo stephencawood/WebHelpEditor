@@ -1,5 +1,4 @@
-﻿@model Site
-@using WebHelpEditor.Helper;
+﻿@model IndexViewModel
 @using WebHelpEditor.Models;
 @{
     Layout = null;
@@ -14,7 +13,7 @@
         return cookieToken + ":" + formToken;
     }
 }
-<html lang="en">
+<html lang="en" ng-app="editorApp">
 <head>
     <meta charset="utf-8" />
     <title>@ViewBag.Title</title>
@@ -38,15 +37,9 @@
         }
     </style>
 </head>
-<body> @*ng-app="MyApp" ng-controller="MyCtrl">*@
+<body>
     <!-- Navbar -->
-    @*<div data-bind="visible: loading">Loading...</div>*@
-    @*<div ng-show="contentLoaded" data-bind="visible: loading">Loading...</div>*@
-        @*<div ng-show="container body-content">
-            Loading...
-        </div>*@
-    <div class="container body-content"> @*ng-show="contentLoaded">*@
-        @*<div style="display: none" data-bind="visible: true" class="container body-content">*@
+    <div class="container body-content">
         <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
@@ -55,75 +48,80 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    @*<p class="navbar-brand" data-bind="if: !loggedIn()">Web Help Editor</p>*@
                     <a href="#" class="navbar-brand" data-bind="click: navigateToHome">Web Help Editor</a>
                 </div>
                 <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        @*<li><a href="#" data-bind="click: navigateToHome">Home</a></li>
-                            <li>@Html.ActionLink("API", "Index", "Help", new { area = "HelpPage" }, null)</li>*@
-                    </ul>
-                    @*@Html.DropDownList(m => m.SiteId, Model.Sites)*@
-                    <div>
-                        @using (Html.BeginForm()) {
-                            @Html.DropDownListFor(model => model.Name, (SelectList)ViewBag.Sites, "Language")
-                        }
+                    <div id="languageDropdown" class="nav navbar-nav">
+                        @Html.DropDownList("SelectedLanguage", (SelectList)ViewBag.Languages)
                     </div>
-
                     <div id="userSettings" class="nav navbar-nav navbar-right">
                         @Html.Partial("_UserSettings")
                     </div>
                 </div>
             </div>
         </div>
-
-        <div data-bind="foreach: errors" class="padding-error">
-            <p class="text-danger" data-bind="text: $data"></p>
-        </div>
         <!-- /Navbar -->
         <!-- Page Editor -->
-        <div class="row" id="editorApp" ng-app="editorApp" ng-controller="EditorCtrl">
+        <div class="row" id="editorApp" ng-controller="EditorCtrl">
             <div class="col-lg-3">
                 <h1>File System</h1>
-
                 <div>
                     <div id="FileTree"></div>
                 </div>
+            </div>
+            <div id="multilingualEditor" style="display:none;">
+                <div class="col-lg-5">
+                    <h1>Multilingual Content</h1>
+                    <div style="vertical-align:top">Title: <input type="text" id="titleHtml" class="title" placeholder="No file loaded..." width="400" /></div>
+                    <textarea name="textEditor" id="textEditor" rows="10" cols="40">No file loaded...</textarea><br />
+                    <script language="javascript1.2">
+                        make_wyzz('textEditor');
+                    </script>
+                    <div ng-controller="EditorCtrl">
+                        <form novalidate class="simple-form">
+                            <button ng-click="saveFileContent()">save</button>
+                        </form>
+                    </div>
+                    <div>
+                        <p class="lead">File: <span class="lead" id="multilingualfile">{{multilingualfile}}</span></p>
+                    </div>
+                </div>
+            </div>
 
-            </div>
-            <div class="col-lg-5">
-                <h1>Multilingual Content</h1>
-                <div style="vertical-align:top">Title: <input type="text" id="titleHtml" class="title" placeholder="No file loaded..." width="400" /></div>
-                <textarea name="textEditor" id="textEditor" rows="10" cols="40">No file loaded...</textarea><br />
-                <script language="javascript1.2">
-                    make_wyzz('textEditor');
-                </script>
-                <div ng-controller="EditorCtrl">
-                    <form novalidate class="simple-form">
-                        <button ng-click="saveFileContent()">save</button>
-                    </form>
-                </div>
-                <div>
-                    <p class="lead">File: <span class="lead" id="multilingualfile">{{multilingualfile}}</span></p>
-                </div>
-            </div>
             <div class="col-lg-4">
                 <h1>English Content</h1>
-                <iframe id="english" src="" width="500" height="650"></iframe>
-                <p class="lead">File: {{englishfile}}</p>
-            </div>
+                <div style="vertical-align:top">
+                    Title: <div id="titleHtmlEnglish">No file loaded</div>
+                    <iframe id="english" src="" width="500" height="650"></iframe>
+                    <p class="lead">File: {{englishfile}}</p>
+                </div>
 
+            </div>
         </div>
     </div>
 
     <!-- /Page Editor -->
-    @*@Scripts.Render("~/bundles/knockout")*@
-    @*@Scripts.Render("~/bundles/appBlue")*@
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/Scripts/angular.min.js")
+    
+    <script language="javascript">
+        $(document).ready(function () {
+            $("#SelectedLanguage").change(function () {
+                var selection = $("#SelectedLanguage").val();
+                // English is value 1
+                if (selection > 1) {
+                    //alert("Showing multilingual");
+                    multilingualEditor.style.display = 'block';
+                } else {
+                    multilingualEditor.style.display = 'none';
+                }
+                
+            });
+        });
+    </script>
 
     <script>
-        var myApp = angular.module('editorApp', []);
+            var myApp = angular.module('editorApp', []);
 
         myApp.controller('EditorCtrl', ['$scope', '$http', function ($scope, $http) {
 
@@ -194,27 +192,27 @@
             },
 
             "plugins": ["themes", "json_data", "dnd", "contextmenu", "ui", "crrm"]
-        })
+        });
 
-        $('#FileTree').bind("loaded.jstree", function (event, data) {
+        $('#FileTree').bind("loaded.jstree", function(event, data) {
             // you get two params - event & data - check the core docs for a detailed description
             $(this).jstree("close_all");
-        })
+        });
 
         $('#FileTree').bind('select_node.jstree', function (e, data) {
 
-            data.rslt.obj.each(function () {
+            data.rslt.obj.each(function() {
                 //alert(this.id);
                 var path = this.id;
 
                 e = document.getElementById('editorApp');
                 scope = angular.element(e).scope();
                 // update the model with a wrap in $apply(fn) which will refresh the view for us
-                scope.$apply(function () {
+                scope.$apply(function() {
                     scope.getFileContent(path);
                     scope.contentLoaded = true;
                 });
-            })
+            });
         });
         // End JSTree
     </script>

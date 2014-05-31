@@ -93,7 +93,7 @@
 
                     @*<div>
 
-                            @foreach (FileToEdit file in FileToEdit.GetFiles(ViewBag.FilePathFrench))
+                            @foreach (File file in File.GetFiles(ViewBag.FilePathFrench))
                             {
                                 <text>
                                     <p><button class="link" ng-click="getFileContent('@Server.UrlEncode(file.FilePath)', true)">@file.Name</button></p>

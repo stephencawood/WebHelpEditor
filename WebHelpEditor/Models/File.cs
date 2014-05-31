@@ -7,29 +7,29 @@ using WebHelpEditor.Helper;
 
 namespace WebHelpEditor.Models
 {
-    public class FileToEdit
+    public class File
     {
         public string FilePath { get; set; }
         public string Name { get; set; }
         public string Content { get; set; }
         public string LoadLink { get; set; }
    
-        public FileToEdit(string filePath)
+        public File(string filePath)
         {
                 this.FilePath = filePath;
                 this.Name = Path.GetFileName(filePath);
-                this.Content = File.ReadAllText(filePath);
+                this.Content = System.IO.File.ReadAllText(filePath);
         }
 
-        public static IList<FileToEdit> GetFiles(string path)
+        public static IList<File> GetFiles(string path)
         {
             try
             {
-                IList<FileToEdit> fileList = new List<FileToEdit>();
+                IList<File> fileList = new List<File>();
                 
                 foreach(string filePath in Directory.GetFiles(path, "*.htm"))
                 {
-                    FileToEdit temp = new FileToEdit(filePath);
+                    File temp = new File(filePath);
                     fileList.Add(temp);
                 }
 

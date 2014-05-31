@@ -1,18 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Sites>
   <Site>
-    <ID>1</ID>
+    <Id>1</Id>
     <Name>English</Name>
-    <Path>test English</Path>
+    <Path>help-en</Path>
   </Site>
   <Site>
-    <ID>2</ID>
+    <Id>2</Id>
     <Name>Francais</Name>
-    <Path>test fr</Path>
+    <Path>help-fr</Path>
   </Site>
   <Site>
-    <ID>3</ID>
+    <Id>3</Id>
     <Name>Espanol</Name>
-    <Path>test spanish</Path>
+    <Path>help-es</Path>
   </Site>
 </Sites>

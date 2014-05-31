@@ -193,7 +193,7 @@ var sh = {
 		/**
 		 * Create a standard anchor button for the toolbar.
 		 * @param {String} label			Label text to display.
-		 * @param {String} highlighterId	Highlighter ID that this button would belong to.
+		 * @param {String} highlighterId	Highlighter id that this button would belong to.
 		 * @param {String} commandName		Command name that would be executed.
 		 * @return {Element}				Returns an 'A' element.
 		 */
@@ -244,7 +244,7 @@ var sh = {
 		 * Executes a toolbar command.
 		 * @param {Element}		sender  		Sender element.
 		 * @param {MouseEvent}	event			Original mouse event object.
-		 * @param {String}		highlighterId	Highlighter DIV element ID.
+		 * @param {String}		highlighterId	Highlighter DIV element id.
 		 * @param {String}		commandName		Name of the command to execute.
 		 * @return {Object} Passes out return value from command execution.
 		 */
@@ -508,7 +508,7 @@ var sh = {
 		},
 		
 		/**
-		 * Generates a unique element ID.
+		 * Generates a unique element id.
 		 */
 		guid : function(prefix)
 		{
