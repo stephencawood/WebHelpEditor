@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
 using System.Web;
-using System.Web.Hosting;
 using System.Web.Mvc;
 
 using System.IO;
-//using System.Xml.Linq;
-using Microsoft.Ajax.Utilities;
 using WebHelpEditor.Helper;
 using WebHelpEditor.Models;
 
@@ -16,7 +12,7 @@ namespace WebHelpEditor.Controllers
 {
     public class HomeController : Controller
     {
-        // TODO add this to a config file
+        // TODO just use the application path??
         private string DataPath = ConfigurationManager.AppSettings["HTMLPath"]; 
         
         public ActionResult Index(string returnUrl)
@@ -198,12 +194,7 @@ namespace WebHelpEditor.Controllers
                     var rootNode = new JsTreeModel();
                     rootNode.attr = new JsTreeAttribute();
                     rootNode.data = "Root";
-                    //string rootPath = Request.MapPath(DataPath);
-                    
-                    // TODO temp test
-                    string rootPath2 = Request.ApplicationPath;
-                    
-                    string rootPath = HostingEnvironment.MapPath(DataPath);
+                    var rootPath = Request.MapPath(DataPath);  
                     rootNode.attr.id = rootPath;
                     PopulateTree(rootPath, rootNode);
                     AlreadyPopulated = true;

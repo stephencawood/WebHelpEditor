@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web.Routing;
 using System.Web.UI.WebControls.Expressions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -62,20 +63,19 @@ namespace WebHelpEditor.Tests
         public void GetTreeDataTest()
         {
             // Arrange
-            var session = new MockHttpSession();
-            var context = new Mock<ControllerContext>();
-            context.Setup(m => m.HttpContext.Session).Returns(session);
-            //var files = new Mock<HttpFileCollectionBase>();
-            var request = new Mock<HttpRequestBase>(); 
-            //request.Setup(req => req.Files).Returns(files.Object);
-            request.Setup(req => req.ApplicationPath).Returns("~/"); 
-            var response = new Mock<HttpResponseBase>(); 
-            response.Setup(res => res.ApplyAppPathModifier(It.IsAny<string>())).
-                Returns((string virtualPath) => virtualPath);
+            var session = new Mock<HttpSessionStateBase>();
+            var context = new Mock<HttpContextBase>(MockBehavior.Strict); 
+            var request = new Mock<HttpRequestBase>(MockBehavior.Strict);
 
+            request.Setup(x => x.ApplicationPath).Returns("/");
+            request.Setup(x => x.MapPath(It.IsAny<string>())).Returns<string>(path => @"S:\GitHub\WebHelpEditor\WebHelpEditor.Tests\TestFiles\AQUARIUS\help-en\help");
+            request.Setup(x => x.ServerVariables).Returns(new System.Collections.Specialized.NameValueCollection());
+            context.SetupGet(m => m.Request).Returns(request.Object);
+            context.Setup(ctx => ctx.Session).Returns(session.Object);
+            
             string resultTest;
             var home = new HomeController();
-            home.ControllerContext = context.Object;
+            home.ControllerContext = new ControllerContext(context.Object, new RouteData(), home);
             home.Session["AlreadyPopulated"] = false;
 
             // Act
