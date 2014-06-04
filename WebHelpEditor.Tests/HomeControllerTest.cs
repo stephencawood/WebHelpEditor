@@ -6,6 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Web;
 using System.Web.Mvc;
 using WebHelpEditor.Controllers;
+//using WebHelpEditor.Tests;
 using Moq;
 
 // Example asserts
@@ -63,19 +64,8 @@ namespace WebHelpEditor.Tests
         public void GetTreeDataTest()
         {
             // Arrange
-            var session = new Mock<HttpSessionStateBase>();
-            var context = new Mock<HttpContextBase>(MockBehavior.Strict); 
-            var request = new Mock<HttpRequestBase>(MockBehavior.Strict);
-
-            request.Setup(x => x.ApplicationPath).Returns("/");
-            request.Setup(x => x.MapPath(It.IsAny<string>())).Returns<string>(path => @"S:\GitHub\WebHelpEditor\WebHelpEditor.Tests\TestFiles\AQUARIUS\help-en\help");
-            request.Setup(x => x.ServerVariables).Returns(new System.Collections.Specialized.NameValueCollection());
-            context.SetupGet(m => m.Request).Returns(request.Object);
-            context.Setup(ctx => ctx.Session).Returns(session.Object);
-            
-            string resultTest;
             var home = new HomeController();
-            home.ControllerContext = new ControllerContext(context.Object, new RouteData(), home);
+            FakeHttpContextHelper.SetFakeControllerContext(home); 
             home.Session["AlreadyPopulated"] = false;
 
             // Act
