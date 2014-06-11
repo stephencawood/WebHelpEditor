@@ -13,25 +13,16 @@ namespace WebHelpEditor.Tests
             public void IndexTest()
             {
                 // Arrange
-
-                //var view = new controller.Index();
-                //view.ViewBag.Message = "Testing";
-
-                var controller = new HomeController();
-                FakeHttpContextHelper.SetFakeControllerContext(controller);
-                controller.Session["AlreadyPopulated"] = false;
+                var home = new HomeController();
+                FakeHttpContextHelper.SetFakeControllerContext(home);
+                home.Session["AlreadyPopulated"] = false;
 
                 // Act
-                var result = controller.Index("www.test.com") as ContentResult;
+                var result = home.Index("www.test.com") as ViewResult;
 
-                //HtmlDocument doc = view.RenderAsHtml();
-                //HtmlNode node = doc.DocumentNode.Element("h2");
-                
                 // Assert
                 Assert.IsNotNull(result);
-                Assert.AreEqual("Hello World!.", result.Content);
-
-                //Assert.AreEqual("Testing", node.InnerHtml.Trim());
+                Assert.AreEqual("Index", result.ViewName);
             }
         }
     }
