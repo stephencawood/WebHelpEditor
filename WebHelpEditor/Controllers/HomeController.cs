@@ -13,7 +13,7 @@ namespace WebHelpEditor.Controllers
     public class HomeController : Controller
     {
         // TODO just use the application path??
-        private string DataPath = ConfigurationManager.AppSettings["HTMLPath"]; 
+        private readonly string _dataPath = ConfigurationManager.AppSettings["HTMLPath"]; 
         
         public ActionResult Index(string returnUrl)
         {
@@ -194,7 +194,7 @@ namespace WebHelpEditor.Controllers
                     var rootNode = new JsTreeModel();
                     rootNode.attr = new JsTreeAttribute();
                     rootNode.data = "Root";
-                    var rootPath = Request.MapPath(DataPath);  
+                    var rootPath = Request.MapPath(_dataPath);  
                     rootNode.attr.id = rootPath;
                     PopulateTree(rootPath, rootNode);
                     AlreadyPopulated = true;

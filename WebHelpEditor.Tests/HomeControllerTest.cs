@@ -1,26 +1,6 @@
-﻿using System;
-using System.Web.Routing;
-using System.Web.UI.WebControls.Expressions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-using System.Web;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Web.Mvc;
 using WebHelpEditor.Controllers;
-//using WebHelpEditor.Tests;
-using Moq;
-
-// Example asserts
-//Assert.That(result["Status"], Is.True);
-//Assert.AreEqual(pathEnglish, result.Data);
-//.AssertResultIs<JsonResult>()
-//var jsonResult = yourController.YourAction(params);
-//var js = new JavaScriptSerializer();
-//var deserializedTarget = (object[])js.DeserializeObject(result.Data.ToString());
-//var pathEnglish = deserializedTarget["PathEnglish"].ToString();
-
-//object parsedJson = JsonConvert.DeserializeObject(result.Data.ToString());
-//string test = JsonConvert.SerializeObject(parsedJson, Formatting.Indented);
-
 
 namespace WebHelpEditor.Tests
 {
@@ -39,8 +19,8 @@ namespace WebHelpEditor.Tests
             JsonResult result = (JsonResult) home.GetFileContent(FilePath);
 
             // TODO validate result against expected content. Add actual testable content that cant' be edited
-            string expected = "{ BodyContent = <html";
-            string resultStart = result.Data.ToString().Substring(0, 21);
+            const string expected = "{ BodyContent = <html";
+            var resultStart = result.Data.ToString().Substring(0, 21);
 
             // Assert
             Assert.AreEqual(expected, resultStart);

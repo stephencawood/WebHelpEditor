@@ -8,10 +8,10 @@ namespace WebHelpEditor.Areas.HelpPage
     public static class ApiDescriptionExtensions
     {
         /// <summary>
-        /// Generates an URI-friendly id for the <see cref="ApiDescription"/>. E.g. "Get-Values-id_name" instead of "GetValues/{id}?name={name}"
+        /// Generates an URI-friendly ID for the <see cref="ApiDescription"/>. E.g. "Get-Values-id_name" instead of "GetValues/{id}?name={name}"
         /// </summary>
         /// <param name="description">The <see cref="ApiDescription"/>.</param>
-        /// <returns>The id as a string.</returns>
+        /// <returns>The ID as a string.</returns>
         public static string GetFriendlyId(this ApiDescription description)
         {
             string path = description.RelativePath;

@@ -1,7 +1,5 @@
 ﻿using System.Linq;
-
 using System.Web.Mvc;
-using DotNetOpenAuth.OpenId.Extensions.AttributeExchange;
 
 namespace WebHelpEditor.Models
 {
