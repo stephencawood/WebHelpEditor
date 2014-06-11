@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Remoting.Channels;
 using System.Web;
+using System.Web.Mvc;
 using System.Xml.Linq;
 
 namespace WebHelpEditor.Models
@@ -13,11 +13,11 @@ namespace WebHelpEditor.Models
         public string Name { get; set; }
         public string Path { get; set; }
 
-        public static List<Language> GetLanguages()
+        public static List<Language> GetLanguages(string path)
         {
             try
             {
-                XDocument doc = XDocument.Load(HttpContext.Current.Request.PhysicalApplicationPath + "\\LanguagesConfig.xml");
+                XDocument doc = XDocument.Load(path);
                 var query = from site in doc.Root.Elements("Site")
                             select new Language
                             {

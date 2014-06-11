@@ -19,8 +19,9 @@ namespace WebHelpEditor.Controllers
         {
             Session["AlreadyPopulated"] = false;
             ViewBag.ReturnUrl = returnUrl;
-            ViewBag.Languages = IndexViewModel.GetLanguages();
-            return View();
+            string path = Request.PhysicalApplicationPath;
+            ViewBag.Languages = IndexViewModel.GetLanguages(path + "LanguagesConfig.xml");
+            return View("Index");
         }
 
         //public ActionResult Test(string returnUrl)
