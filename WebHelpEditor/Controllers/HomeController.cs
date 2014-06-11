@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Configuration;
 using System.Web;
 using System.Web.Mvc;
 
 using System.IO;
-//using System.Xml.Linq;
 using WebHelpEditor.Helper;
 using WebHelpEditor.Models;
 
@@ -13,13 +12,14 @@ namespace WebHelpEditor.Controllers
 {
     public class HomeController : Controller
     {
-        public static string dataPath = "/AQUARIUS/help-fr/help/8WSCToolboxes";
+        // TODO just use the application path??
+        private readonly string _dataPath = ConfigurationManager.AppSettings["HTMLPath"]; 
         
         public ActionResult Index(string returnUrl)
         {
-            ViewBag.ReturnUrl = returnUrl;
             Session["AlreadyPopulated"] = false;
-            ViewBag.Sites = IndexViewModel.GetSites();
+            ViewBag.ReturnUrl = returnUrl;
+            ViewBag.Languages = IndexViewModel.GetLanguages();
             return View();
         }
 
@@ -174,12 +174,12 @@ namespace WebHelpEditor.Controllers
                 log.LogLine("Home Controller SaveFileContent Error: ", "Message: " + ex.Message + "Source: " + ex.Source);
 
                 return Json
-                    (
-                        new
-                        {
-                            Result = "Error saving content: " + ex.ToString(),
-                        }
-                    );
+                (
+                    new
+                    {
+                        Result = "Error saving content: " + ex.ToString(),
+                    }
+                );
             }
         }
 
@@ -187,20 +187,33 @@ namespace WebHelpEditor.Controllers
         [HttpPost]
         public ActionResult GetTreeData()
         {
-            if (AlreadyPopulated == false)
+            try
             {
-                JsTreeModel rootNode = new JsTreeModel();
-                rootNode.attr = new JsTreeAttribute();
-                rootNode.data = "Root";
-                string rootPath = Request.MapPath(dataPath);
-                rootNode.attr.id = rootPath;
-                PopulateTree(rootPath, rootNode);
-                AlreadyPopulated = true;
-                return Json(rootNode);
+                if (AlreadyPopulated == false)
+                {
+                    var rootNode = new JsTreeModel();
+                    rootNode.attr = new JsTreeAttribute();
+                    rootNode.data = "Root";
+                    var rootPath = Request.MapPath(_dataPath);  
+                    rootNode.attr.id = rootPath;
+                    PopulateTree(rootPath, rootNode);
+                    AlreadyPopulated = true;
+                    return Json(rootNode);
+                }
+                else
+                {
+                    return null;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return null;
+                return Json
+                (
+                    new
+                    {
+                        Result = "Error retrieving file tree: " + ex.ToString(),
+                    }
+                );
             }
         }
 
@@ -216,7 +229,7 @@ namespace WebHelpEditor.Controllers
                 node.children = new List<JsTreeModel>();
             }
             // get the information of the directory
-            DirectoryInfo directory = new DirectoryInfo(dir);
+            var directory = new DirectoryInfo(dir);
             // loop through each subdirectory
             foreach (DirectoryInfo d in directory.GetDirectories())
             {
@@ -233,7 +246,7 @@ namespace WebHelpEditor.Controllers
             foreach (FileInfo f in directory.GetFiles("*.htm"))
             {
                 // create a new node
-                JsTreeModel t = new JsTreeModel();
+                var t = new JsTreeModel();
                 t.attr = new JsTreeAttribute();
                 t.attr.id = f.FullName;
                 t.data = f.Name.ToString();
