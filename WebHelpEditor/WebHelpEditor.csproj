@@ -220,7 +220,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helper\CustomTextAreaHelper.cs" />
-    <Compile Include="Helper\FtpHelper.cs" />
     <Compile Include="Helper\HtmlFileHelper.cs" />
     <Compile Include="Helper\LogFile.cs" />
     <Compile Include="Login.aspx.cs">
