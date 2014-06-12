@@ -24,20 +24,14 @@ namespace WebHelpEditor.Controllers
             return View("Index");
         }
 
-        //public ActionResult Test(string returnUrl)
-        //{
-        //    ViewBag.ReturnUrl = returnUrl;
-        //    Session["AlreadyPopulated"] = false;
-        //    return View();
-        //}
-
         [NoCache]
         [HttpGet]
         public ActionResult GetFileContent(string filePath)
         {
             try
             {
-                string path = HttpUtility.UrlDecode(filePath);
+                string path = "";
+                path = HttpUtility.UrlDecode(filePath);
 
                 if (!System.IO.File.Exists(path))
                     return Json
@@ -55,14 +49,6 @@ namespace WebHelpEditor.Controllers
                 string bodyContent = "";
                 string bodyContentEnglish = "";
                 string pathEnglish = path.Replace("help-fr", "help-en");
-
-                // Format: C:\DWASFiles\Sites\fileeditor\VirtualDirectory0\site\wwwroot\\Test\help-fr\3UserAccessTabWSCLocMan.htm
-                // Remove extra slash and make path shorter by splitting on "\wwwroot\\Test\"
-                // Fix up file header -- custom for wyzz editor control issues
-                //string divider = "\\\\Test\\";
-                //int index = pathEnglish.IndexOf(divider);
-                //string pathShort = path.Remove(0, index + divider.Length);
-                //string pathEnglishShort = pathEnglish.Remove(0, index + divider.Length);
                 string pathShort = path;
                 string pathEnglishShort = pathEnglish;
 
@@ -132,35 +118,8 @@ namespace WebHelpEditor.Controllers
 
                 // Backup the old file and replace it with the temp file
                 var backupFilePath = filePath + "_backup_" + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + ".backup";
-                System.IO.File.Replace(filePath + "_temp", filePath, backupFilePath);
-
-                // TODO temp
-                //string deployment = "debug";
-
-                // Write a backup to an FTP server
-                // Convert the file path to an FTP path
-                #if DEBUG
-                    divider = "\\WebHelpEditor\\WebHelpEditor\\"; //local test version
-                #else
-                    divider = "\\wwwroot\\"; //deployed version
-                    //deployment = "production";
-                #endif
-
-                index = filePath.IndexOf(divider);
-                string ftpPath = filePath.Remove(0, index + divider.Length);
-                string ftpPathBackup = backupFilePath.Remove(0, index + divider.Length);
-                // TODO probably don't need the first replace
-                //ftpPath.Replace("\\\\", "/");
-                //ftpPath.Replace("\\", "/");
+                System.IO.File.Replace(filePath + "_temp", filePath, backupFilePath);             
                 
-                // TODO temp debuging
-                //var log = new LogFile();
-                //log.LogLine("FTP debug: ", "FilePath: " + filePath + " FTPPath: " + ftpPath + " Deployment: " + deployment);
-
-                // TODO temporarily backup the files to an FTP server b/c deploy is currently erasing all files on target
-                FtpHelper.Upload(filePath, ftpPath);
-                FtpHelper.Upload(backupFilePath, ftpPathBackup);
-
                 return Json
                     (
                         new

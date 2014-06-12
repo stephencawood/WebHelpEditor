@@ -1,5 +1,6 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.IO;
 using System.Web.Mvc;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WebHelpEditor.Controllers;
 
 namespace WebHelpEditor.Tests
@@ -29,15 +30,21 @@ namespace WebHelpEditor.Tests
         [TestMethod]
         public void SaveFileContentTest()
         {
-            // Format for file path string passed to Home "S%3a%5cSource%5cWebHelpEditor%5cWebHelpEditor%5cTest%5cSaveFileTest"
-            // maps to: "S:\Source\WebHelpEditor\WebHelpEditor\Test\SaveFileTest";
-
+            // Arrange
             var home = new HomeController();
-            home.SaveFileContent("\\TestFiles", FileContent, "TestFileWrite");
+            FakeHttpContextHelper.SetFakeControllerContext(home);
+            home.Session["AlreadyPopulated"] = false;
+            
+            // Act
+            home.SaveFileContent(@"S:\GitHub\WebHelpEditor\WebHelpEditor.Tests\TestFiles\TestFileWrite", FileContent, "TestHtmlTitle");
 
             // Assert
             // todo check if file is there
-            //Assert.AreEqual(expected, resultStart);
+            Assert.IsTrue(File.Exists(@"S:\GitHub\WebHelpEditor\WebHelpEditor.Tests\TestFiles\TestFileWrite"));
+
+            // Cleanup
+            //File.Delete("\\TestFiles\\TestFileWrite");
+
         }
 
         [TestMethod]
