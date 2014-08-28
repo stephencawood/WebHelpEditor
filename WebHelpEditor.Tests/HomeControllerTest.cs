@@ -8,22 +8,21 @@ namespace WebHelpEditor.Tests
     [TestClass]
     public class HomeControllerTest
     {
-        private const string FilePath = @"S:\GitHub\WebHelpEditor\WebHelpEditor.Tests\TestFiles\testDoNotEdit.htm";
-
-        private const string FileContent =
-            @"<html><head><title>Test content for file editor</title><link rel=""stylesheet"" type=""text/css"" href=""/AQUARIUS/help-en/include/templates/wwhelp.css"" /></head><body><p>This is an HTML test</p></body></html>";
+        private const string RootPath = @"S:\GitHub\WebHelpEditor\WebHelpEditor.Tests\TestFiles\";
+        private const string FileContent = @"<html><head><title>Test content for file editor</title><link rel=""stylesheet"" type=""text/css"" href=""/AQUARIUS/help-en/include/templates/wwhelp.css"" /></head><body><p>This is an HTML test</p></body></html>";
 
         [TestMethod]
         public void GetFileContentTest()
         {
+            // Arrange
             var home = new HomeController();
-            JsonResult result = (JsonResult) home.GetFileContent(FilePath);
 
-            // TODO validate result against expected content. Add actual testable content that cant' be edited
-            const string expected = "{ BodyContent = <html";
-            var resultStart = result.Data.ToString().Substring(0, 21);
+            // Act
+            var result = (JsonResult)home.GetFileContent(RootPath + "\\testDoNotEdit.htm");
 
             // Assert
+            const string expected = "{ BodyContent = <html";
+            var resultStart = result.Data.ToString().Substring(0, 21);
             Assert.AreEqual(expected, resultStart);
         }
 
@@ -31,20 +30,20 @@ namespace WebHelpEditor.Tests
         public void SaveFileContentTest()
         {
             // Arrange
+            const string fileName = "TestFileName.htm";
             var home = new HomeController();
             FakeHttpContextHelper.SetFakeControllerContext(home);
             home.Session["AlreadyPopulated"] = false;
+            File.Create(RootPath + fileName).Close();
             
             // Act
-            home.SaveFileContent(@"S:\GitHub\WebHelpEditor\WebHelpEditor.Tests\TestFiles\TestFileWrite", FileContent, "TestHtmlTitle");
+            home.SaveFileContent(RootPath + fileName, FileContent, "TestHtmlTitle");
 
             // Assert
-            // todo check if file is there
-            Assert.IsTrue(File.Exists(@"S:\GitHub\WebHelpEditor\WebHelpEditor.Tests\TestFiles\TestFileWrite"));
+            Assert.IsTrue(File.Exists(RootPath + fileName));
 
             // Cleanup
-            //File.Delete("\\TestFiles\\TestFileWrite");
-
+            File.Delete(RootPath + fileName);
         }
 
         [TestMethod]
@@ -56,7 +55,7 @@ namespace WebHelpEditor.Tests
             home.Session["AlreadyPopulated"] = false;
 
             // Act
-            JsonResult result = (JsonResult) home.GetTreeData();
+            var result = (JsonResult) home.GetTreeData();
 
             // Assert
             Assert.IsFalse(result.Data.ToString().Contains("Error retrieving file tree:"));
@@ -64,7 +63,7 @@ namespace WebHelpEditor.Tests
 
         public class MockHttpSession : System.Web.HttpSessionStateBase
         {
-            System.Collections.Generic.Dictionary<string, object> _sessionDictionary = new System.Collections.Generic.Dictionary<string, object>();
+            readonly System.Collections.Generic.Dictionary<string, object> _sessionDictionary = new System.Collections.Generic.Dictionary<string, object>();
             public override object this[string name]
             {
                 get { return _sessionDictionary[name]; }
