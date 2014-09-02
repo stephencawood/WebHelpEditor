@@ -40,5 +40,6 @@ HTMLDefines.h
 *_Debug_Log.txt
 Log.txt
 TestOutput
-AQUARIUS/
+GitHub/
 *.backup
+WebHelpEditor.Tests/TestFiles/AQUARIUS/
