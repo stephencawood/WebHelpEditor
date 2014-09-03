@@ -24,6 +24,12 @@ namespace WebHelpEditor.Controllers
             return View("Index");
         }
 
+        public ActionResult LogOff()
+        {
+            // TODO redirect to the login page
+            return View("Index");
+        }
+
         [NoCache]
         [HttpGet]
         public ActionResult GetFileContent(string filePath)

@@ -1,4 +1,4 @@
-﻿/* Cawood: button that looks like an achor */
+﻿/* button that looks like an anchor */
 button.link {
     background:none!important;
      border:none; 
@@ -16,6 +16,22 @@ button.link:hover{
 input.title {
     width: 540px;
     max-width: 540px;
+}
+
+.navbar-blueTop {
+    background-color: #0ca3d2;
+}
+
+.navbar-header-white {
+    float: left;
+    background-color: #FFFFFF;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.navbar-right-align {
+    float: right;
+    margin-right: 60px;
 }
 
 /* jsTree Styles */
