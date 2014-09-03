@@ -3,16 +3,16 @@
   <Site>
     <Id>1</Id>
     <Name>English</Name>
-    <Path>help-en</Path>
+    <Path>EN\AQUARIUS\help-en</Path>
   </Site>
   <Site>
     <Id>2</Id>
     <Name>Francais</Name>
-    <Path>help-fr</Path>
+    <Path>FR\AQUARIUS\help-fr</Path>
   </Site>
   <Site>
     <Id>3</Id>
     <Name>Espanol</Name>
-    <Path>help-es</Path>
+    <Path>ES\AQUARIUS\help-es</Path>
   </Site>
 </Sites>

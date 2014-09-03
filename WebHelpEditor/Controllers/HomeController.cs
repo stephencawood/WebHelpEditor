@@ -13,8 +13,7 @@ namespace WebHelpEditor.Controllers
 {
     public class HomeController : Controller
     {
-        // TODO just use the application path??
-        private readonly string _dataPath = ConfigurationManager.AppSettings["HTMLPath"]; 
+        private readonly string _dataPath = ConfigurationManager.AppSettings["FilePath"]; 
         
         public ActionResult Index(string returnUrl)
         {
@@ -156,11 +155,21 @@ namespace WebHelpEditor.Controllers
         {
             try
             {
+                var rootNode = new JsTreeModel();
+                rootNode.attr = new JsTreeAttribute();
+                rootNode.data = "Error: No files found";
+
+                if (!Directory.Exists(Server.MapPath(_dataPath)))
+                {
+                    var log = new LogFile();
+                    log.LogLine("Home Controller GetTreeData Error", "Message: Root directory not found.");
+
+                    return Json(rootNode);
+                }
+
                 if (AlreadyPopulated == false)
                 {
-                    var rootNode = new JsTreeModel();
-                    rootNode.attr = new JsTreeAttribute();
-                    rootNode.data = "Root";
+                    rootNode.data = "Help";
                     var rootPath = Request.MapPath(_dataPath);  
                     rootNode.attr.id = rootPath;
                     PopulateTree(rootPath, rootNode);
