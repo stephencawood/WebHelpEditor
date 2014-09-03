@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 
 using System.IO;
+using System.Web.Security;
 using WebHelpEditor.Helper;
 using WebHelpEditor.Models;
 
@@ -26,8 +27,8 @@ namespace WebHelpEditor.Controllers
 
         public ActionResult LogOff()
         {
-            // TODO redirect to the login page
-            return View("Index");
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index", "Home");
         }
 
         [NoCache]
