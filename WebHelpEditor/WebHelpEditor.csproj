@@ -243,6 +243,8 @@
     <Content Include="Content\bootstrap-mvc-validation.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\dropDown.css" />
+    <Content Include="Content\images\arrow.png" />
     <Content Include="Content\site.css" />
     <Content Include="Content\images\AILogo.png" />
     <Content Include="Content\WebHelpEditor.css" />
@@ -290,6 +292,7 @@
     <Content Include="Scripts\app\todo.viewmodel.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\dropDown.js" />
     <Content Include="Scripts\html5shiv.js" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />

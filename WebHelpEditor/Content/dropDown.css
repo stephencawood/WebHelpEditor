@@ -1,0 +1,65 @@
+﻿div.dropdown {
+    background-color:#0ca3d2;
+    font-family:arial;
+    color: #ffffff;
+    margin: 3px -22px 0 0;
+    width: 80px;
+    position: relative;
+    height: 12px;
+    text-align:left;
+}
+div.submenu
+{
+    background: #fff;
+    position: absolute;
+    top: 5px;
+    left: -20px;
+    z-index: 100;
+    width: 100px;
+    display: none;
+    margin-left: 10px;
+    padding: 40px 0 5px;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+}
+
+.dropdown  li a {
+    color: #555555;
+    display: block;
+    font-family: arial;
+    font-weight: normal;
+    padding: 6px 21px;
+    cursor: pointer;
+    text-decoration:none;
+}
+
+.dropdown li a:hover{
+    background:#155FB0;
+    color: #FFFFFF;
+    text-decoration: none;
+    
+}
+div.account {
+    font-size: 14px;
+    line-height: 16px;
+    color: black;
+    position: absolute;
+    z-index: 120;
+    display: block;
+    padding: 11px 0 0 20px;
+    height: 28px;
+    width: 121px;
+    margin: 0px 0 0 -10px;
+    text-decoration: none;
+    background: url(/Content/images/arrow.png) 80px 17px no-repeat;
+    cursor:pointer;
+}
+.root
+{
+    list-style:none;
+    margin:0px;
+    padding:0px;
+    font-size: 14px;
+    padding: 11px 0 0 0px;
+    border-top:1px solid #dedede;
+}
