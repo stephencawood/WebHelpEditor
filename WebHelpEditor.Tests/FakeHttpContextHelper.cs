@@ -29,7 +29,8 @@ namespace WebHelpEditor.Tests
             response.Setup(x => x.ApplyAppPathModifier(It.IsAny<string>())).Returns((string virtualPath) => virtualPath);
             user.Setup(x => x.Identity).Returns(identity.Object);
             identity.SetupGet(x => x.IsAuthenticated).Returns(true);
-            server.Setup(x => x.MapPath(It.IsAny<string>())).Returns<string>(path => @"c:" + path.Substring(1, path.Length - 1));
+            // This enables the GetTreeDataTest
+            server.Setup(x => x.MapPath(It.IsAny<string>())).Returns<string>(path => @"S:\GitHub\WebHelpEditor\WebHelpEditor.Tests\TestFiles\AQUARIUS\help-en\help");
             
             context.Setup(x => x.Request).Returns(request.Object);
             context.Setup(x => x.Response).Returns(response.Object);

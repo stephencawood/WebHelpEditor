@@ -12,9 +12,7 @@ using WebHelpEditor.Models;
 namespace WebHelpEditor.Controllers
 {
     public class HomeController : Controller
-    {
-        private readonly string _dataPath = ConfigurationManager.AppSettings["FilePath"]; 
-        
+    {        
         public ActionResult Index(string returnUrl)
         {
             Session["AlreadyPopulated"] = false;
@@ -160,14 +158,16 @@ namespace WebHelpEditor.Controllers
         {
             try
             {
+                var dataPath = ConfigurationManager.AppSettings["EditFilePath"]; 
                 var rootNode = new JsTreeModel();
+                var serverPath = Server.MapPath(dataPath);
                 rootNode.attr = new JsTreeAttribute();
                 rootNode.data = "Error: No files found";
 
-                if (!Directory.Exists(Server.MapPath(_dataPath)))
+                if (!Directory.Exists(serverPath))
                 {
                     var log = new LogFile();
-                    log.LogLine("Home Controller GetTreeData Error", "Message: Root directory not found.");
+                    log.LogLine("Home Controller GetTreeData Error", "Message: Root directory not found at: " + serverPath);
 
                     return Json(rootNode);
                 }
@@ -175,7 +175,7 @@ namespace WebHelpEditor.Controllers
                 if (AlreadyPopulated == false)
                 {
                     rootNode.data = "Help";
-                    var rootPath = Request.MapPath(_dataPath);  
+                    var rootPath = Request.MapPath(dataPath);  
                     rootNode.attr.id = rootPath;
                     PopulateTree(rootPath, rootNode);
                     AlreadyPopulated = true;
