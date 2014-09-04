@@ -34,6 +34,18 @@ input.title {
     margin-right: 60px;
 }
 
+.nopadding {
+   padding: 0 !important;
+   margin: 0 !important;
+}
+
+/* Allow Bootstrap grid larger than 940px 
+@media (min-width: 1200px) {
+  .container {
+    width: 1200px;
+   }
+}*/
+
 /* jsTree Styles */
 /*#MainTree .jstree-closed > a > ins { background-image:url("/jstree/themes/default/d.gif"); } 
 #MainTree .jstree-open > a > ins { background-image:url("/jstree/themes/default/d.gif"); } 

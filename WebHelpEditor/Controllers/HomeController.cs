@@ -122,10 +122,15 @@ namespace WebHelpEditor.Controllers
                     sw.WriteLine(fixedContent);
                 }
 
+                // TODO don't need the backup anymore
                 // Backup the old file and replace it with the temp file
-                var backupFilePath = filePath + "_backup_" + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + ".backup";
-                System.IO.File.Replace(filePath + "_temp", filePath, backupFilePath);             
-                
+                //var backupFilePath = filePath + "_backup_" + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + ".backup";
+                //System.IO.File.Replace(filePath + "_temp", filePath, backupFilePath);             
+
+                if (System.IO.File.Exists(filePath)) System.IO.File.Delete(filePath);
+                System.IO.File.Move(filePath + "_temp", filePath);
+                if (System.IO.File.Exists(filePath + "_temp")) System.IO.File.Delete(filePath + "_temp");
+
                 return Json
                     (
                         new

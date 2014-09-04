@@ -36,20 +36,20 @@
 </head>
 <body>
     <!-- Navbar -->
-    <div class="container body-content">
+    <div class="container-fluid body-content">
         <div class="navbar navbar-blueTop navbar-fixed-top">
-            <div class="container">
+            <div class="container-fluid">
                 <div class="navbar-header-white">
-                    <img src="~/Content/images/AILogo.png" height="40">
+                    <img src="~/Content/images/AILogo.png" height="40" alt="Aquatic Informatics Logo" />
                 </div>
-                <div class="navbar-header">                   
+                <div class="navbar-header">
                 </div>
                 <div class="navbar-collapse collapse">
+                    <div id="userSettings" class="nav navbar-right-align">
+                        @Html.Partial("_UserSettings")
+                    </div>
                     <div id="languageDropdown" class="nav navbar-right-align">
                         @Html.DropDownList("SelectedLanguage", (SelectList)ViewBag.Languages)
-                    </div>
-                    <div id="userSettings" class="nav navbar-nav navbar-right">
-                        @Html.Partial("_UserSettings")
                     </div>
                 </div>
             </div>
@@ -58,38 +58,40 @@
         <!-- Page Editor -->
         <div class="row" id="editorApp" ng-controller="EditorCtrl">
             <div class="col-lg-3">
-                <h1>File System</h1>
+                <h3>File System</h3>
                 <div>
                     <div id="FileTree"></div>
                 </div>
             </div>
-            <div id="multilingualEditor" style="display:none;">
-                <div class="col-lg-5">
-                    <h1>Multilingual Content</h1>
-                    <div style="vertical-align:top">Title: <input type="text" id="titleHtml" class="title" placeholder="No file loaded..." width="400" /></div>
-                    <textarea name="textEditor" id="textEditor" rows="10" cols="40">No file loaded...</textarea><br />
-                    <script language="javascript1.2">
-                        make_wyzz('textEditor');
-                    </script>
-                    <div ng-controller="EditorCtrl">
-                        <form novalidate class="simple-form">
-                            <button ng-click="saveFileContent()">save</button>
-                        </form>
-                    </div>
-                    <div>
-                        <p class="lead">File: <span class="lead" id="multilingualfile">{{multilingualfile}}</span></p>
-                    </div>
+
+            <div id="editor" class="col-lg-5">
+                <div id="englishHeader"><h3>English Editor</h3></div>
+                <div id="multilingualHeader" style="display:none;"><h3>Multilingual Editor</h3></div>
+
+                <div style="vertical-align:top">
+                    Title: <input type="text" id="titleHtml" placeholder="No file loaded..." width="600" />
+                    <textarea name="textEditor" id="textEditor" rows="30" cols="40">No file loaded...</textarea><br />
+                </div>
+                <script language="javascript1.2">
+                    make_wyzz('textEditor');
+                </script>
+                <div ng-controller="EditorCtrl">
+                    <form novalidate class="">
+                        <button ng-click="saveFileContent()">save</button>
+                    </form>
+                </div>
+                <div>
+                    <p>File: <span id="editfilepath">{{editfilepath}}</span></p>
                 </div>
             </div>
 
-            <div class="col-lg-4">
-                <h1>English Content</h1>
+            <div id="englishreadonly" class="col-lg-4" style="display:none;">
+                <h3>English Content</h3>
                 <div style="vertical-align:top">
                     Title: <div id="titleHtmlEnglish">No file loaded</div>
                     <iframe id="english" src="" width="500" height="650"></iframe>
-                    <p class="lead">File: {{englishfile}}</p>
+                    <p>File: {{englishfile}}</p>
                 </div>
-
             </div>
         </div>
     </div>
@@ -97,19 +99,22 @@
     <!-- /Page Editor -->
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/Scripts/angular.min.js")
-    
+
     <script language="javascript">
         $(document).ready(function () {
             $("#SelectedLanguage").change(function () {
                 var selection = $("#SelectedLanguage").val();
                 // English is value 1
                 if (selection > 1) {
-                    //alert("Showing multilingual");
-                    multilingualEditor.style.display = 'block';
+                    englishreadonly.style.display = 'block';
+                    englishHeader.style.display = 'none';
+                    multilingualHeader.style.display = 'block';
                 } else {
-                    multilingualEditor.style.display = 'none';
+                    englishreadonly.style.display = 'none';
+                    englishHeader.style.display = 'block';
+                    multilingualHeader.style.display = 'none';
                 }
-                
+
             });
         });
     </script>
@@ -131,7 +136,7 @@
                         document.getElementById("english").contentWindow.document.body.innerHTML = response.data.BodyContentEnglish;
                         document.getElementById("titleHtml").value = response.data.HtmlTitle;
 
-                        $scope.multilingualfile = response.data.Path;
+                        $scope.editfilepath = response.data.Path;
                         document.getElementById("wysiwyg" + "textEditor").contentWindow.document.body.innerHTML = response.data.BodyContent;
                     },
                     function (data) {
@@ -141,7 +146,7 @@
             }
 
             $scope.saveFileContent = function () {
-                $http.post('/Home/SaveFileContent', { filePath: document.getElementById("multilingualfile").innerHTML, content: document.getElementById("wysiwyg" + "textEditor").contentWindow.document.body.innerHTML, title: document.getElementById("titleHtml").value })
+                $http.post('/Home/SaveFileContent', { filePath: document.getElementById("editfilepath").innerHTML, content: document.getElementById("wysiwyg" + "textEditor").contentWindow.document.body.innerHTML, title: document.getElementById("titleHtml").value })
                     .then(
                     function (response) {
                         alert("File saved");
@@ -187,21 +192,21 @@
             "plugins": ["themes", "json_data", "dnd", "contextmenu", "ui", "crrm"]
         });
 
-        $('#FileTree').bind("loaded.jstree", function(event, data) {
+        $('#FileTree').bind("loaded.jstree", function (event, data) {
             // you get two params - event & data - check the core docs for a detailed description
             $(this).jstree("close_all");
         });
 
         $('#FileTree').bind('select_node.jstree', function (e, data) {
 
-            data.rslt.obj.each(function() {
+            data.rslt.obj.each(function () {
                 //alert(this.id);
                 var path = this.id;
 
                 e = document.getElementById('editorApp');
                 scope = angular.element(e).scope();
                 // update the model with a wrap in $apply(fn) which will refresh the view for us
-                scope.$apply(function() {
+                scope.$apply(function () {
                     scope.getFileContent(path);
                     scope.contentLoaded = true;
                 });
@@ -211,4 +216,5 @@
     </script>
 
 </body>
+
 </html>
