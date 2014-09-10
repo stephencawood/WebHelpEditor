@@ -16,9 +16,26 @@ namespace WebHelpEditor.Tests
         {
             // Arrange
             var home = new HomeController();
+            FakeHttpContextHelper.SetFakeControllerContext(home);
 
             // Act
-            var result = (JsonResult)home.GetFileContent(RootPath + "\\testDoNotEdit.htm", "english");
+            var result = (JsonResult)home.GetFileContent(RootPath + "\\testDoNotEdit.htm", "1");
+
+            // Assert
+            const string expected = "{ BodyContent = <html";
+            var resultStart = result.Data.ToString().Substring(0, 21);
+            Assert.AreEqual(expected, resultStart);
+        }
+
+        [TestMethod]
+        public void GetFileContentMultilingualTest()
+        {
+            // Arrange
+            var home = new HomeController();
+            FakeHttpContextHelper.SetFakeControllerContext(home);
+
+            // Act
+            var result = (JsonResult)home.GetFileContent(RootPath + "\\testDoNotEdit.htm", "2");
 
             // Assert
             const string expected = "{ BodyContent = <html";
@@ -37,7 +54,7 @@ namespace WebHelpEditor.Tests
             File.Create(RootPath + fileName).Close();
             
             // Act
-            home.SaveFileContent(RootPath + fileName, FileContent, "TestHtmlTitle");
+            home.SaveFileContent(RootPath + fileName, "1", FileContent, "TestHtmlTitle");
 
             // Assert
             Assert.IsTrue(File.Exists(RootPath + fileName));

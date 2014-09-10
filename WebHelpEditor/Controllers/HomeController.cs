@@ -19,7 +19,7 @@ namespace WebHelpEditor.Controllers
         public ActionResult Index(string returnUrl)
         {
             Session["AlreadyPopulated"] = false;
-            ViewBag.ReturnUrl = returnUrl;
+            //ViewBag.ReturnUrl = returnUrl;
             var path = Request.PhysicalApplicationPath;
             ViewBag.Languages = IndexViewModel.GetLanguages(path + "LanguagesConfig.xml");
             //ViewBag.EditLanguage = "english";
@@ -54,29 +54,9 @@ namespace WebHelpEditor.Controllers
 
                 // Get the english path from the multilingual path if necessary
                 List<Language> languageList = Language.GetLanguages(Request.PhysicalApplicationPath + "LanguagesConfig.xml");
-                //var englishLanguage = languageList.Find(i => i.Name.ToLower() == "english");
-                //var pathEnglish = englishLanguage.PathWeb;
                 var selectedLanguage = languageList.Find(i => i.Id == languageCode);
                 var pathEditFile = "";
-
-                if (selectedLanguage.Name.ToLower() == "english")
-                {
-                    pathEditFile = filePathEnglish;
-                }
-                else
-                {
-                    // Set the non-English file path
-                    if (selectedLanguage.Name.ToLower() == "francais")
-                    { 
-                        var temp = filePathEnglish.Replace("\\EN\\", "\\FR\\");
-                        pathEditFile = temp.Replace("\\help-en\\", "\\help-fr\\");
-                    }
-                    else if (selectedLanguage.Name.ToLower() == "espanol")
-                    {
-                        var temp = filePathEnglish.Replace("\\EN\\", "\\ES\\");
-                        pathEditFile = temp.Replace("\\help-en\\", "\\help-es\\");
-                    }
-                }
+                pathEditFile = GetMultilingualPath(selectedLanguage, filePathEnglish);
  
                 var htmlTitle = "";
                 var htmlTitleEnglish = "";
@@ -96,6 +76,7 @@ namespace WebHelpEditor.Controllers
                 }
                 else
                 {
+                    // TODO Spanish note below
                     bodyContent = "Note: Spanish is not ready yet. ERROR: Multilingual file does not exist: " + pathEditFile;
                 }
                 
@@ -127,9 +108,33 @@ namespace WebHelpEditor.Controllers
             }
         }
 
- 
+
+        private static string GetMultilingualPath(Language selectedLanguage, string englishPath)
+        {
+            var pathMultilingual = "";
+            switch (selectedLanguage.Name.ToLower())
+            {
+                case "english":
+                    pathMultilingual = englishPath;
+                    break;
+                case "francais":
+                {
+                    pathMultilingual = englishPath.Replace("\\EN\\", "\\FR\\");
+                    pathMultilingual = pathMultilingual.Replace("\\help-en\\", "\\help-fr\\");
+                }
+                    break;
+                case "espanol":
+                {
+                    pathMultilingual = englishPath.Replace("\\EN\\", "\\ES\\");
+                    pathMultilingual = pathMultilingual.Replace("\\help-en\\", "\\help-es\\");
+                }
+                    break;
+            }
+            return pathMultilingual;
+        }
+
         [HttpPost]
-        public ActionResult SaveFileContent(string filePath, string content, string title)
+        public ActionResult SaveFileContent(string filePath, string languageCode, string content, string title)
         {
             try
             {
@@ -146,9 +151,15 @@ namespace WebHelpEditor.Controllers
                 // Fix up file footer
                 fixedContent += "\n\t</body>\n</html>";
 
+                // Get the multilingual path if necessary
+                List<Language> languageList = Language.GetLanguages(Request.PhysicalApplicationPath + "LanguagesConfig.xml");
+                var selectedLanguage = languageList.Find(i => i.Id == languageCode);
+                var multilingualPath = "";
+                multilingualPath = GetMultilingualPath(selectedLanguage, filePath);
+
                 // Write a temp version of the old file. Using create to overwrite any previous temp files
-                System.IO.File.Create(filePath + "_temp").Close();
-                using (var sw = new System.IO.StreamWriter(filePath + "_temp"))
+                System.IO.File.Create(multilingualPath + "_temp").Close();
+                using (var sw = new System.IO.StreamWriter(multilingualPath + "_temp"))
                 {
                     sw.WriteLine(fixedContent);
                 }
@@ -158,9 +169,9 @@ namespace WebHelpEditor.Controllers
                 //var backupFilePath = filePath + "_backup_" + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + ".backup";
                 //System.IO.File.Replace(filePath + "_temp", filePath, backupFilePath);             
 
-                if (System.IO.File.Exists(filePath)) System.IO.File.Delete(filePath);
-                System.IO.File.Move(filePath + "_temp", filePath);
-                if (System.IO.File.Exists(filePath + "_temp")) System.IO.File.Delete(filePath + "_temp");
+                if (System.IO.File.Exists(multilingualPath)) System.IO.File.Delete(multilingualPath);
+                System.IO.File.Move(multilingualPath + "_temp", multilingualPath);
+                if (System.IO.File.Exists(multilingualPath + "_temp")) System.IO.File.Delete(multilingualPath + "_temp");
 
                 return Json
                     (

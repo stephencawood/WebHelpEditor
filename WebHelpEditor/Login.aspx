@@ -303,8 +303,8 @@ time, mark, audio, video {
         <p>
             <label>
             <asp:Button id="LoginButton" Text="Login" OnClick="Login_OnClick" runat="server" />
-            <asp:CheckBox id="NotPublicCheckBox" runat="server" /> 
-            Remember me on this computer
+            <%--<asp:CheckBox id="NotPublicCheckBox" runat="server" /> 
+            Remember me on this computer--%>
             </label>
             <asp:Label id="Msg" ForeColor="maroon" runat="server" />
         </p>    

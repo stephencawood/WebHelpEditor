@@ -20,6 +20,7 @@ namespace WebHelpEditor.Tests
             var user = new Mock<IPrincipal>();
             var identity = new Mock<IIdentity>();
 
+            requestContext.Setup(x => x.HttpContext).Returns(context.Object);
             request.Setup(x => x.ApplicationPath).Returns("~/");
             request.Setup(x => x.PhysicalApplicationPath).Returns(@"S:\GitHub\WebHelpEditor\WebHelpEditor.Tests\");
             request.Setup(x => x.AppRelativeCurrentExecutionFilePath).Returns("~/");

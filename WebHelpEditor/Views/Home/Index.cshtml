@@ -2,7 +2,6 @@
 @{
     Layout = null;
     Response.Headers["X-UA-Compatible"] = "IE=10";
-    ViewBag.Title = "Web Help Editor";
 }
 @functions{
     public string GetAntiForgeryToken()
@@ -15,7 +14,7 @@
 <html lang="en" ng-app="editorApp">
 <head>
     <meta charset="utf-8" />
-    <title>@ViewBag.Title</title>
+    <title>Web Help Editor</title>
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content="Web Help Editor" />
@@ -53,7 +52,7 @@
                         @Html.DropDownList("SelectedLanguage", (SelectList)ViewBag.Languages)
                     </div>
                     <div>
-                        Selected language: <span id="editlanguage">{{editlanguage}}</span>
+                        @*Selected language: <span id="editlanguage">{{editlanguage}}</span>*@
                     </div>
                 </div>
             </div>
@@ -162,7 +161,7 @@
             }
 
             $scope.saveFileContent = function () {
-                $http.post('/Home/SaveFileContent', { filePath: document.getElementById("editfilepath").innerHTML, content: document.getElementById("wysiwyg" + "textEditor").contentWindow.document.body.innerHTML, title: document.getElementById("titleHtml").value })
+                $http.post('/Home/SaveFileContent', { filePath: document.getElementById("editfilepath").innerHTML, languageCode: document.getElementById("SelectedLanguage").value, content: document.getElementById("wysiwyg" + "textEditor").contentWindow.document.body.innerHTML, title: document.getElementById("titleHtml").value })
                     .then(
                         function (response) {
                             alert("File saved");
