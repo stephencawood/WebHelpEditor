@@ -11,7 +11,7 @@ namespace WebHelpEditor.Models
     {
         public string Id { get; set; }
         public string Name { get; set; }
-        public string Path { get; set; }
+        public string PathWeb { get; set; }
 
         public static List<Language> GetLanguages(string path)
         {
@@ -23,7 +23,7 @@ namespace WebHelpEditor.Models
                             {
                                 Id = (string)site.Element("Id"),
                                 Name = (string)site.Element("Name"),
-                                Path = (string)site.Element("Path"),
+                                PathWeb = (string)site.Element("PathWeb"),
                             };
 
                 var sites = query.ToList();

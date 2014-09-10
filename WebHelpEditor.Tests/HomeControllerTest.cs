@@ -18,7 +18,7 @@ namespace WebHelpEditor.Tests
             var home = new HomeController();
 
             // Act
-            var result = (JsonResult)home.GetFileContent(RootPath + "\\testDoNotEdit.htm");
+            var result = (JsonResult)home.GetFileContent(RootPath + "\\testDoNotEdit.htm", "english");
 
             // Assert
             const string expected = "{ BodyContent = <html";

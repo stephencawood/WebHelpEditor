@@ -3,16 +3,16 @@
   <Site>
     <Id>1</Id>
     <Name>English</Name>
-    <Path>EN\AQUARIUS\help-en</Path>
+    <PathWeb>/Github/EN/AQUARIUS/help-en</PathWeb>
   </Site>
   <Site>
     <Id>2</Id>
     <Name>Francais</Name>
-    <Path>FR\AQUARIUS\help-fr</Path>
+    <PathWeb>/Github/EN/AQUARIUS/help-en</PathWeb>
   </Site>
   <Site>
     <Id>3</Id>
     <Name>Espanol</Name>
-    <Path>ES\AQUARIUS\help-es</Path>
+    <PathWeb>/Github/EN/AQUARIUS/help-en</PathWeb>
   </Site>
 </Sites>

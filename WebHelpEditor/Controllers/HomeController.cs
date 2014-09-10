@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
 using System.IO;
 using System.Web.Security;
+//using System.Web.Helpers;
+//using BootstrapSupport;
 using WebHelpEditor.Helper;
 using WebHelpEditor.Models;
 
@@ -17,8 +20,9 @@ namespace WebHelpEditor.Controllers
         {
             Session["AlreadyPopulated"] = false;
             ViewBag.ReturnUrl = returnUrl;
-            string path = Request.PhysicalApplicationPath;
+            var path = Request.PhysicalApplicationPath;
             ViewBag.Languages = IndexViewModel.GetLanguages(path + "LanguagesConfig.xml");
+            //ViewBag.EditLanguage = "english";
             return View("Index");
         }
 
@@ -30,14 +34,11 @@ namespace WebHelpEditor.Controllers
 
         [NoCache]
         [HttpGet]
-        public ActionResult GetFileContent(string filePath)
+        public ActionResult GetFileContent(string filePathEnglish, string languageCode)
         {
             try
             {
-                string path = "";
-                path = HttpUtility.UrlDecode(filePath);
-
-                if (!System.IO.File.Exists(path))
+                if (!System.IO.File.Exists(HttpUtility.UrlDecode(filePathEnglish)))
                     return Json
                     (
                         new
@@ -50,33 +51,64 @@ namespace WebHelpEditor.Controllers
                         }
                     , JsonRequestBehavior.AllowGet);
 
-                string bodyContent = "";
-                string bodyContentEnglish = "";
-                string pathEnglish = path.Replace("help-fr", "help-en");
-                string pathShort = path;
-                string pathEnglishShort = pathEnglish;
 
-                string htmlTitle = "";
-                if (System.IO.File.Exists(path))
+                // Get the english path from the multilingual path if necessary
+                List<Language> languageList = Language.GetLanguages(Request.PhysicalApplicationPath + "LanguagesConfig.xml");
+                //var englishLanguage = languageList.Find(i => i.Name.ToLower() == "english");
+                //var pathEnglish = englishLanguage.PathWeb;
+                var selectedLanguage = languageList.Find(i => i.Id == languageCode);
+                var pathEditFile = "";
+
+                if (selectedLanguage.Name.ToLower() == "english")
                 {
-                    bodyContent = System.IO.File.ReadAllText(path);
-                    bodyContentEnglish = System.IO.File.ReadAllText(pathEnglish);
-                    htmlTitle = HtmlFileHelper.GetTitle(bodyContent);
+                    pathEditFile = filePathEnglish;
                 }
                 else
                 {
-                    bodyContent = "ERROR. File does not exist: " + path + " or " + pathEnglish;
+                    // Set the non-English file path
+                    if (selectedLanguage.Name.ToLower() == "francais")
+                    { 
+                        var temp = filePathEnglish.Replace("\\EN\\", "\\FR\\");
+                        pathEditFile = temp.Replace("\\help-en\\", "\\help-fr\\");
+                    }
+                    else if (selectedLanguage.Name.ToLower() == "espanol")
+                    {
+                        var temp = filePathEnglish.Replace("\\EN\\", "\\ES\\");
+                        pathEditFile = temp.Replace("\\help-en\\", "\\help-es\\");
+                    }
                 }
+ 
+                var htmlTitle = "";
+                var htmlTitleEnglish = "";
+                var bodyContent = "";
+                var bodyContentEnglish = "";
 
+                if (System.IO.File.Exists(HttpUtility.UrlDecode(pathEditFile)))
+                {
+                    bodyContent = System.IO.File.ReadAllText(pathEditFile);
+                    htmlTitle = HtmlFileHelper.GetTitle(bodyContent);
+                    // Only load the English read only content if necessary
+                    if (selectedLanguage.Name.ToLower() != "english")
+                    {
+                        bodyContentEnglish = System.IO.File.ReadAllText(filePathEnglish);
+                        htmlTitleEnglish = HtmlFileHelper.GetTitle(bodyContentEnglish);
+                    }
+                }
+                else
+                {
+                    bodyContent = "Note: Spanish is not ready yet. ERROR: Multilingual file does not exist: " + pathEditFile;
+                }
+                
                 return Json
                     (
                         new
                         {
                             BodyContent = bodyContent,
                             BodyContentEnglish = bodyContentEnglish,
-                            Path = pathShort,
-                            PathEnglish = pathEnglishShort,
+                            Path = pathEditFile,
+                            PathEnglish = filePathEnglish,
                             HtmlTitle = htmlTitle,
+                            HtmlTitleEnglish = htmlTitleEnglish,
                         }
                     , JsonRequestBehavior.AllowGet);
             }
@@ -89,21 +121,22 @@ namespace WebHelpEditor.Controllers
                     (
                         new
                         {
-                            BodyContent = "Error loading file content: " + filePath,
+                            BodyContent = "Error loading file content: " + filePathEnglish,
                         }
                     , JsonRequestBehavior.AllowGet);
             }
         }
 
+ 
         [HttpPost]
         public ActionResult SaveFileContent(string filePath, string content, string title)
         {
             try
             {
                 // Fix up file header -- custom for wyzz editor control issues
-                string divider = "css\">";
+                var divider = "css\">";
                 int index = content.IndexOf(divider);
-                string fixedContent = content.Remove(0, index + divider.Length);
+                var fixedContent = content.Remove(0, index + divider.Length);
                 char[] arr = new char[] { '\t', ',', ' ', '\n' };
                 fixedContent = fixedContent.TrimStart(arr);
                 fixedContent = fixedContent.TrimEnd(arr);
