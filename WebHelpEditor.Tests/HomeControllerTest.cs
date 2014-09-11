@@ -54,7 +54,7 @@ namespace WebHelpEditor.Tests
             File.Create(RootPath + fileName).Close();
             
             // Act
-            home.SaveFileContent(RootPath + fileName, "1", FileContent, "TestHtmlTitle");
+            home.SaveFileContent(RootPath + fileName, FileContent, "TestHtmlTitle");
 
             // Assert
             Assert.IsTrue(File.Exists(RootPath + fileName));

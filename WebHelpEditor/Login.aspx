@@ -298,13 +298,13 @@ time, mark, audio, video {
     <div class="login">
       <h1>Login to AI Web Help Editor</h1>
       <form id="form1" runat="server">
-        <p><asp:Textbox id="UsernameTextbox" runat="server" value="Username"/></p>
-        <p><asp:Textbox id="PasswordTextbox" runat="server" TextMode="Password" value="Password"/></p>      
+        <p><asp:Textbox id="UsernameTextbox" runat="server" placeholder="Username"/></p>
+        <p><asp:Textbox id="PasswordTextbox" runat="server" TextMode="Password" placeholder="Password"/></p>      
         <p>
             <label>
             <asp:Button id="LoginButton" Text="Login" OnClick="Login_OnClick" runat="server" />
-            <%--<asp:CheckBox id="NotPublicCheckBox" runat="server" /> 
-            Remember me on this computer--%>
+            <asp:CheckBox id="NotPublicCheckBox" runat="server" /> 
+            Remember me on this computer
             </label>
             <asp:Label id="Msg" ForeColor="maroon" runat="server" />
         </p>    

@@ -14,7 +14,7 @@
 <html lang="en" ng-app="editorApp">
 <head>
     <meta charset="utf-8" />
-    <title>Web Help Editor</title>
+    <title>Web Help Editor - Beta</title>
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content="Web Help Editor" />
@@ -51,8 +51,8 @@
                     <div id="languageDropdown" class="nav navbar-right-align navbar-top">
                         @Html.DropDownList("SelectedLanguage", (SelectList)ViewBag.Languages)
                     </div>
-                    <div>
-                        @*Selected language: <span id="editlanguage">{{editlanguage}}</span>*@
+                    <div style="color: white">
+                        Selected language: <span id="editlanguage">{{editlanguage}}</span>
                     </div>
                 </div>
             </div>
@@ -84,7 +84,7 @@
                     </form>
                 </div>
                 <div>
-                    <p>File: <span id="editfilepath">{{editfilepath}}</span></p>
+                    File: <div id="editfilepath">{{editfilepath}}</div>
                 </div>
             </div>
 
@@ -144,14 +144,14 @@
                 $http.get('/Home/GetFileContent', { params: { filePathEnglish: file, languageCode: document.getElementById("SelectedLanguage").value } })
                     .then(
                         function (response) {
-                            // Set the English path
                             $scope.englishfile = response.data.PathEnglish;
+                            $scope.editfilepath = response.data.Path;
 
                             document.getElementById("english").contentWindow.document.body.innerHTML = response.data.BodyContentEnglish;
                             document.getElementById("titleHtml").value = response.data.HtmlTitle;
                             document.getElementById("titleHtmlEnglish").innerHTML = "Title: " + response.data.HtmlTitleEnglish;
 
-                            $scope.editfilepath = response.data.PathWeb;
+                            //$scope.editfilepath = response.data.PathWeb;
                             document.getElementById("wysiwyg" + "textEditor").contentWindow.document.body.innerHTML = response.data.BodyContent;
                         },
                         function (data) {
@@ -161,7 +161,7 @@
             }
 
             $scope.saveFileContent = function () {
-                $http.post('/Home/SaveFileContent', { filePath: document.getElementById("editfilepath").innerHTML, languageCode: document.getElementById("SelectedLanguage").value, content: document.getElementById("wysiwyg" + "textEditor").contentWindow.document.body.innerHTML, title: document.getElementById("titleHtml").value })
+                $http.post('/Home/SaveFileContent', { filePath: document.getElementById("editfilepath").innerHTML, content: document.getElementById("wysiwyg" + "textEditor").contentWindow.document.body.innerHTML, title: document.getElementById("titleHtml").value })
                     .then(
                         function (response) {
                             alert("File saved");
@@ -213,10 +213,8 @@
         });
 
         $('#FileTree').bind('select_node.jstree', function (e, data) {
-
             data.rslt.obj.each(function () {
                 var path = this.id;
-
                 e = document.getElementById('editorApp');
                 scope = angular.element(e).scope();
                 // update the model with a wrap in $apply(fn) which will refresh the view for us

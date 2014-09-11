@@ -19,10 +19,9 @@ namespace WebHelpEditor.Controllers
         public ActionResult Index(string returnUrl)
         {
             Session["AlreadyPopulated"] = false;
-            //ViewBag.ReturnUrl = returnUrl;
+            ViewBag.ReturnUrl = returnUrl;
             var path = Request.PhysicalApplicationPath;
             ViewBag.Languages = IndexViewModel.GetLanguages(path + "LanguagesConfig.xml");
-            //ViewBag.EditLanguage = "english";
             return View("Index");
         }
 
@@ -133,13 +132,14 @@ namespace WebHelpEditor.Controllers
             return pathMultilingual;
         }
 
+        [NoCache]
         [HttpPost]
-        public ActionResult SaveFileContent(string filePath, string languageCode, string content, string title)
+        public ActionResult SaveFileContent(string filePath, string content, string title)
         {
             try
             {
                 // Fix up file header -- custom for wyzz editor control issues
-                var divider = "css\">";
+                const string divider = "css\">";
                 int index = content.IndexOf(divider);
                 var fixedContent = content.Remove(0, index + divider.Length);
                 char[] arr = new char[] { '\t', ',', ' ', '\n' };
@@ -147,19 +147,12 @@ namespace WebHelpEditor.Controllers
                 fixedContent = fixedContent.TrimEnd(arr);
 
                 fixedContent = "<html>\n\t<head>\n\t\t<title>" + title + "</title>\n\t\t<link rel=\"stylesheet\" type=\"text/css\" href=\"/AQUARIUS/help-en/include/templates/wwhelp.css\"/>\n\t</head>\n\t<body>\n" + fixedContent;
-
                 // Fix up file footer
                 fixedContent += "\n\t</body>\n</html>";
 
-                // Get the multilingual path if necessary
-                List<Language> languageList = Language.GetLanguages(Request.PhysicalApplicationPath + "LanguagesConfig.xml");
-                var selectedLanguage = languageList.Find(i => i.Id == languageCode);
-                var multilingualPath = "";
-                multilingualPath = GetMultilingualPath(selectedLanguage, filePath);
-
                 // Write a temp version of the old file. Using create to overwrite any previous temp files
-                System.IO.File.Create(multilingualPath + "_temp").Close();
-                using (var sw = new System.IO.StreamWriter(multilingualPath + "_temp"))
+                System.IO.File.Create(filePath + "_temp").Close();
+                using (var sw = new System.IO.StreamWriter(filePath + "_temp"))
                 {
                     sw.WriteLine(fixedContent);
                 }
@@ -169,9 +162,9 @@ namespace WebHelpEditor.Controllers
                 //var backupFilePath = filePath + "_backup_" + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + ".backup";
                 //System.IO.File.Replace(filePath + "_temp", filePath, backupFilePath);             
 
-                if (System.IO.File.Exists(multilingualPath)) System.IO.File.Delete(multilingualPath);
-                System.IO.File.Move(multilingualPath + "_temp", multilingualPath);
-                if (System.IO.File.Exists(multilingualPath + "_temp")) System.IO.File.Delete(multilingualPath + "_temp");
+                if (System.IO.File.Exists(filePath)) System.IO.File.Delete(filePath);
+                System.IO.File.Move(filePath + "_temp", filePath);
+                if (System.IO.File.Exists(filePath + "_temp")) System.IO.File.Delete(filePath + "_temp");
 
                 return Json
                     (
