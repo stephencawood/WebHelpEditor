@@ -150,8 +150,6 @@
                             document.getElementById("english").contentWindow.document.body.innerHTML = response.data.BodyContentEnglish;
                             document.getElementById("titleHtml").value = response.data.HtmlTitle;
                             document.getElementById("titleHtmlEnglish").innerHTML = "Title: " + response.data.HtmlTitleEnglish;
-
-                            //$scope.editfilepath = response.data.PathWeb;
                             document.getElementById("wysiwyg" + "textEditor").contentWindow.document.body.innerHTML = response.data.BodyContent;
                         },
                         function (data) {
