@@ -178,26 +178,14 @@ namespace WebHelpEditor.Controllers
                 System.IO.File.Move(filePath + "_temp", filePath);
                 if (System.IO.File.Exists(filePath + "_temp")) System.IO.File.Delete(filePath + "_temp");
 
-                return Json
-                    (
-                        new
-                        {
-                            Result = "Success",
-                        }
-                    );
+                return Json(new { result = "Success" }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
                 var log = new LogFile();
                 log.LogLine("Home Controller SaveFileContent Error: ", "Message: " + ex.Message + "Source: " + ex.Source);
 
-                return Json
-                (
-                    new
-                    {
-                        Result = "Error saving content: " + ex.ToString(),
-                    }
-                );
+                return Json(new { result = "Error saving content: " + ex.ToString() }, JsonRequestBehavior.AllowGet);
             }
         }
 

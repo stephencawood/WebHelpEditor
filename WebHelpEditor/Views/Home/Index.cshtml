@@ -173,11 +173,8 @@
             $scope.saveFileContent = function () {
                 $http.post('/Home/SaveFileContent', { filePath: document.getElementById("editfilepath").innerHTML, content: document.getElementById("wysiwyg" + "textEditor").contentWindow.document.body.innerHTML, title: document.getElementById("titleHtml").value })
                     .then(
-                        function (response) {
-                            alert("File saved");
-                        },
                         function (data) {
-                            alert("Error saving file content");
+                            alert("File save result: " + data.data.result);
                         }
                     );
             }
