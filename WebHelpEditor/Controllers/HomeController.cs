@@ -129,16 +129,16 @@ namespace WebHelpEditor.Controllers
                 }
                     break;
                 case "chinese":
-                    {
-                        pathMultilingual = englishPath.Replace("\\EN\\", "\\CH\\");
-                        pathMultilingual = pathMultilingual.Replace("\\help-en\\", "\\help-ch\\");
-                    }
+                {
+                    pathMultilingual = englishPath.Replace("\\EN\\", "\\ZH\\");
+                    pathMultilingual = pathMultilingual.Replace("\\help-en\\", "\\help-zh\\");
+                }
                     break;
                 case "usgs":
-                    {
-                        pathMultilingual = englishPath.Replace("\\EN\\", "\\usgs\\");
-                        pathMultilingual = pathMultilingual.Replace("\\help-en\\", "\\help-usgs\\");
-                    }
+                {
+                    pathMultilingual = englishPath.Replace("\\EN\\", "\\usgs\\");
+                    pathMultilingual = pathMultilingual.Replace("\\help-en\\", "\\help-usgs\\");
+                }
                     break;
             }
             return pathMultilingual;
