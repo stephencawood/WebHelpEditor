@@ -12,4 +12,12 @@
     <Id>3</Id>
     <Name>Espanol</Name>
   </Site>
+  <Site>
+    <Id>4</Id>
+    <Name>Hànyǔ</Name>
+  </Site>
+  <Site>
+    <Id>5</Id>
+    <Name>USGS</Name>
+  </Site>
 </Sites>
